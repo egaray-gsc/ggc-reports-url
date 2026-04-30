@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npm show *)",
-      "Bash(grep -r \"egaray\" /c/Users/egaray/Desenvolupament/ggc-reports-url --include=\"*.json\" --include=\"*.js\" --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.md\" --include=\"*.yml\" ! -path \"*/node_modules/*\")"
+      "Bash(grep -r \"egaray\" /c/Users/egaray/Desenvolupament/ggc-reports-url --include=\"*.json\" --include=\"*.js\" --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.md\" --include=\"*.yml\" ! -path \"*/node_modules/*\")",
+      "Bash(git -C /c/Users/egaray/Desenvolupament/ggc-reports-url log --oneline -10)",
+      "Bash(git -C /c/Users/egaray/Desenvolupament/ggc-reports-url remote -v)"
     ]
   }
 }
