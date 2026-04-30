@@ -1,0 +1,96 @@
+name: CWV Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: 'Slugs a auditar separados por coma (vacío = todos)'
+        required: false
+        default: ''
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      timestamp: ${{ steps.ts.outputs.timestamp }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: ts
+        name: Generate timestamp
+        run: echo "timestamp=$(TZ='Europe/Madrid' date +'%Y-%m-%d_%H%M%S')" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - id: set-matrix
+        name: Build matrix from urls.json
+        env:
+          INPUT_SLUGS: ${{ github.event.inputs.slugs }}
+        run: |
+          node --input-type=module <<'EOF' >> "$GITHUB_OUTPUT"
+          import { readFileSync } from 'fs';
+          const urls = JSON.parse(readFileSync('./configs/urls.json', 'utf-8'));
+          const input = process.env.INPUT_SLUGS ?? '';
+          const slugs = input.trim()
+            ? input.split(',').map(s => s.trim()).filter(Boolean)
+            : urls.map(u => u.slug);
+          process.stdout.write('matrix=' + JSON.stringify({ slug: slugs }) + '\n');
+          EOF
+
+  audit:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: browser-actions/setup-chrome@v1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run audit — ${{ matrix.slug }}
+        env:
+          R2_BUCKET:            ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT:          ${{ secrets.R2_ENDPOINT }}
+          R2_BASE_URL:          ${{ secrets.R2_BASE_URL }}
+          R2_ACCESS_KEY_ID:     ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          node scripts/run-audit.js \
+            --slug "${{ matrix.slug }}" \
+            --timestamp "${{ needs.prepare.outputs.timestamp }}"
+
+  aggregate:
+    needs: audit
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Aggregate metrics → dashboard-data.json
+        env:
+          R2_BUCKET:            ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT:          ${{ secrets.R2_ENDPOINT }}
+          R2_BASE_URL:          ${{ secrets.R2_BASE_URL }}
+          R2_ACCESS_KEY_ID:     ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: node scripts/aggregate-metrics.js

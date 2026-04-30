@@ -1,0 +1,65 @@
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0e0f11;
+  --surface:   #161820;
+  --border:    #2a2d35;
+  --text:      #e8e8ea;
+  --text-muted:#9ca3af;
+  --accent:    oklch(0.78 0.15 165);
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* ── Layout ── */
+.app   { min-height: 100vh; display: flex; flex-direction: column; }
+.header { background: var(--surface); border-bottom: 1px solid var(--border); }
+.header-inner {
+  max-width: 1200px; margin: 0 auto; padding: 16px 24px;
+  display: flex; align-items: baseline; gap: 16px;
+}
+.title   { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
+.updated { font-size: 0.75rem; color: var(--text-muted); }
+.main    { max-width: 1200px; margin: 0 auto; padding: 24px; width: 100%; flex: 1; }
+
+/* ── Toggle ── */
+.metric-toggle {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+}
+.toggle-btn {
+  padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-muted); cursor: pointer;
+  font-size: 0.8rem; font-weight: 500; transition: all .15s;
+}
+.toggle-btn:hover  { border-color: var(--accent); color: var(--text); }
+.toggle-btn.active { background: var(--accent); border-color: var(--accent); color: #0e0f11; font-weight: 700; }
+
+/* ── Chart section ── */
+.chart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+
+/* ── Tooltip ── */
+.chart-tooltip {
+  background: #1f2937; border: 1px solid #374151; border-radius: 8px;
+  padding: 10px 14px; font-size: 0.78rem; min-width: 200px;
+}
+.tooltip-date  { color: var(--text-muted); margin-bottom: 8px; font-size: 0.72rem; }
+.tooltip-row   { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.tooltip-dot   { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tooltip-label { flex: 1; color: var(--text-muted); }
+.tooltip-value { font-weight: 600; color: var(--text); }
+.tooltip-score { font-size: 0.65rem; line-height: 1; }
+.tooltip-link  { color: var(--accent); text-decoration: none; font-size: 0.7rem; margin-left: 4px; }
+.tooltip-link:hover { text-decoration: underline; }
+
+/* ── LCP breakdown ── */
+.lcp-breakdown  { margin-top: 32px; }
+.section-title  { font-size: 1rem; font-weight: 600; margin-bottom: 16px; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.75rem; }
+.lcp-breakdown-chart { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
+.chart-label    { font-size: 0.85rem; font-weight: 500; margin-bottom: 12px; color: var(--text-muted); }
+
+/* ── States ── */
+.state-msg       { color: var(--text-muted); padding: 40px 0; text-align: center; }
+.state-msg.error { color: #f87171; }
+.no-data         { color: var(--text-muted); font-size: 0.85rem; padding: 16px 0; }
