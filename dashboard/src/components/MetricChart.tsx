@@ -97,17 +97,16 @@ export function MetricChart({ data, activeMetric }: Props) {
   const meta = METRICS.find((m) => m.key === activeMetric)!;
   const [t1, t2] = meta.thresholds;
 
-  // Construir dataset: una entrada por timestamp único
+  // Construir dataset: una entrada por timestamp único (permite múltiples auditorías el mismo día)
   const allTimestamps = Array.from(
-    new Set(data.urls.flatMap((u) => u.runs.map((r) => r.runDate))),
+    new Set(data.urls.flatMap((u) => u.runs.map((r) => r.timestamp))),
   ).sort();
 
-  const chartData = allTimestamps.map((date) => {
-    const entry: Record<string, unknown> = { date };
+  const chartData = allTimestamps.map((ts) => {
+    const entry: Record<string, unknown> = { date: ts };
     data.urls.forEach((urlData) => {
-      const run = urlData.runs.find((r) => r.runDate === date);
+      const run = urlData.runs.find((r) => r.timestamp === ts);
       if (run) {
-        // Guardar run completo para el tooltip
         entry[`__run_${urlData.slug}`] = run;
         entry[urlData.slug] = getMetricValue(run, activeMetric);
       }
@@ -146,7 +145,13 @@ export function MetricChart({ data, activeMetric }: Props) {
           dataKey="date"
           tick={{ fill: '#9ca3af', fontSize: 11 }}
           tickFormatter={(v: string) => {
-            const [, m, d] = v.split('-');
+            const datePart = v.slice(0, 10);
+            const [, m, d] = datePart.split('-');
+            const sameDayCount = allTimestamps.filter((t) => t.startsWith(datePart)).length;
+            if (sameDayCount > 1) {
+              const timePart = v.slice(11, 16);
+              return `${d}/${m} ${timePart}`;
+            }
             return `${d}/${m}`;
           }}
         />

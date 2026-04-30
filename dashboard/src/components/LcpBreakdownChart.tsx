@@ -45,11 +45,16 @@ export function LcpBreakdownChart({ urls }: Props) {
     <div className="lcp-breakdown">
       <h2 className="section-title">LCP — Sub-partes</h2>
       {urlsWithPhases.map((urlData) => {
-        const chartData = urlData.runs
-          .filter((r) => r.lcp?.phases != null)
+        const runsWithPhases = urlData.runs.filter((r) => r.lcp?.phases != null);
+        const chartData = runsWithPhases
           .map((r) => ({
             date: (() => {
-              const [, m, d] = r.runDate.split('-');
+              const datePart = r.timestamp.slice(0, 10);
+              const [, m, d] = datePart.split('-');
+              const sameDayCount = runsWithPhases.filter((x) => x.timestamp.startsWith(datePart)).length;
+              if (sameDayCount > 1) {
+                return `${d}/${m} ${r.timestamp.slice(11, 16)}`;
+              }
               return `${d}/${m}`;
             })(),
             ttfb:         r.lcp!.phases!.ttfb         ?? 0,
