@@ -1,18 +1,7 @@
-export interface LcpPhases {
-  ttfb: number | null;
-  loadDelay: number | null;
-  loadDuration: number | null;
-  renderDelay: number | null;
-}
-
 export interface MetricValue {
   value: number | null;
   score: number | null;
   displayValue: string | null;
-}
-
-export interface LcpMetric extends MetricValue {
-  phases: LcpPhases | null;
 }
 
 export interface RunMetrics {
@@ -22,7 +11,7 @@ export interface RunMetrics {
   runDate: string;
   timestamp: string;
   performanceScore: number | null;
-  lcp: LcpMetric | null;
+  lcp: MetricValue | null;
   fcp: MetricValue | null;
   cls: MetricValue | null;
   tbt: MetricValue | null;

@@ -13,34 +13,8 @@ function getAudit(lhr, id) {
   };
 }
 
-function extractLcpPhases(lhr) {
-  const items = lhr.audits?.['lcp-phases']?.details?.items ?? [];
-  if (items.length === 0) return null;
-
-  const phaseValue = (keyword) => {
-    const item = items.find((i) => {
-      const label = (i.phase?.value ?? i.phase ?? '').toLowerCase();
-      return label.includes(keyword);
-    });
-    // timing puede ser { type: 'ms', value: N } o un número directo
-    const raw = item?.timing;
-    if (raw == null) return null;
-    return typeof raw === 'object' ? (raw.value ?? null) : raw;
-  };
-
-  return {
-    ttfb:         phaseValue('ttfb'),
-    loadDelay:    phaseValue('delay'),
-    loadDuration: phaseValue('duration') ?? phaseValue('time'),
-    renderDelay:  phaseValue('render'),
-  };
-}
-
 export function extractCwv(lhr, { slug, url, label, timestamp }) {
   const runDate = timestamp.slice(0, 10); // "YYYY-MM-DD"
-
-  const lcpAudit = getAudit(lhr, 'largest-contentful-paint');
-  const lcpPhases = extractLcpPhases(lhr);
 
   const lcpElementItem =
     lhr.audits?.['largest-contentful-paint-element']?.details?.items?.[0];
@@ -48,7 +22,7 @@ export function extractCwv(lhr, { slug, url, label, timestamp }) {
     lcpElementItem?.node?.snippet ?? lcpElementItem?.node?.nodeLabel ?? null;
 
   const reportUrl =
-    `${process.env.R2_BASE_URL ?? ''}/${slug}/${timestamp}/report.html`;
+    `${process.env.R2_BASE_URL ?? ''}/reports-url/${encodeURIComponent(slug)}/${timestamp}/report.html`;
 
   return {
     slug,
@@ -59,9 +33,7 @@ export function extractCwv(lhr, { slug, url, label, timestamp }) {
     performanceScore: lhr.categories?.performance?.score != null
       ? Math.round(lhr.categories.performance.score * 100)
       : null,
-    lcp: lcpAudit
-      ? { ...lcpAudit, phases: lcpPhases }
-      : null,
+    lcp: getAudit(lhr, 'largest-contentful-paint'),
     fcp:        getAudit(lhr, 'first-contentful-paint'),
     cls:        getAudit(lhr, 'cumulative-layout-shift'),
     tbt:        getAudit(lhr, 'total-blocking-time'),

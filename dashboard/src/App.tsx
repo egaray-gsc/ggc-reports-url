@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import type { DashboardData, MetricKey } from './types';
 import { MetricToggle } from './components/MetricToggle';
 import { MetricChart } from './components/MetricChart';
-import { LcpBreakdownChart } from './components/LcpBreakdownChart';
 import './App.css';
 
 const R2_BASE_URL = import.meta.env.VITE_R2_BASE_URL ?? '';
@@ -52,9 +51,6 @@ export default function App() {
               <MetricChart data={data} activeMetric={activeMetric} />
             </section>
 
-            {activeMetric === 'lcp' && (
-              <LcpBreakdownChart urls={data.urls} />
-            )}
           </>
         )}
       </main>
