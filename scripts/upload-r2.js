@@ -26,7 +26,7 @@ async function putObject(key, body, contentType, cacheControl) {
  * Sube metrics.json y report.html para un slug + timestamp concreto.
  */
 export async function uploadReport(slug, timestamp, metricsJson, reportHtml) {
-  const prefix = `${slug}/${timestamp}`;
+  const prefix = `reports-url/${slug}/${timestamp}`;
   await Promise.all([
     putObject(
       `${prefix}/metrics.json`,
@@ -48,7 +48,7 @@ export async function uploadReport(slug, timestamp, metricsJson, reportHtml) {
  */
 export async function uploadDashboardData(json) {
   await putObject(
-    'dashboard-data.json',
+    'reports-url/dashboard-data.json',
     json,
     'application/json',
     'public, max-age=300',

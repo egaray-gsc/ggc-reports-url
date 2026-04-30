@@ -22,7 +22,8 @@ const client = new S3Client({
   },
 });
 
-const METRICS_RE = /^[^/]+\/[^/]+\/metrics\.json$/;
+const BASE_PREFIX = 'reports-url/';
+const METRICS_RE = /^reports-url\/[^/]+\/[^/]+\/metrics\.json$/;
 
 async function listAllMetricsKeys() {
   const keys = [];
@@ -31,6 +32,7 @@ async function listAllMetricsKeys() {
   do {
     const cmd = new ListObjectsV2Command({
       Bucket: process.env.R2_BUCKET,
+      Prefix: BASE_PREFIX,
       ContinuationToken: continuationToken,
     });
     const res = await client.send(cmd);

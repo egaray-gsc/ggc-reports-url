@@ -14,7 +14,7 @@ export default function App() {
   const [activeMetric, setActiveMetric] = useState<MetricKey>('lcp');
 
   useEffect(() => {
-    fetch(`${R2_BASE_URL}/dashboard-data.json?t=${Date.now()}`)
+    fetch(`${R2_BASE_URL}/reports-url/dashboard-data.json?t=${Date.now()}`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json() as Promise<DashboardData>;
