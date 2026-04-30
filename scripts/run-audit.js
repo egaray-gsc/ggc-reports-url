@@ -134,6 +134,7 @@ async function main() {
     console.log('🔦 Lanzando Lighthouse...');
     const flow = await startFlow(page, {
       config: {
+        extends: 'lighthouse:default',
         settings: {
           formFactor: 'mobile',
           screenEmulation: {
