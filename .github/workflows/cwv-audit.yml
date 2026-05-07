@@ -1,12 +1,9 @@
 name: CWV Audit
 
 on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
   workflow_dispatch:
-    inputs:
-      slugs:
-        description: 'Slugs a auditar separados por coma (vacío = todos)'
-        required: false
-        default: ''
 
 jobs:
   prepare:
@@ -27,17 +24,11 @@ jobs:
 
       - id: set-matrix
         name: Build matrix from urls.json
-        env:
-          INPUT_SLUGS: ${{ github.event.inputs.slugs }}
         run: |
           node --input-type=module <<'EOF' >> "$GITHUB_OUTPUT"
           import { readFileSync } from 'fs';
           const urls = JSON.parse(readFileSync('./configs/urls.json', 'utf-8'));
-          const input = process.env.INPUT_SLUGS ?? '';
-          const slugs = input.trim()
-            ? input.split(',').map(s => s.trim()).filter(Boolean)
-            : urls.map(u => u.slug);
-          process.stdout.write('matrix=' + JSON.stringify({ slug: slugs }) + '\n');
+          process.stdout.write('matrix=' + JSON.stringify({ slug: urls.map(u => u.slug) }) + '\n');
           EOF
 
   audit:
@@ -61,10 +52,10 @@ jobs:
 
       - name: Run audit — ${{ matrix.slug }}
         env:
-          R2_BUCKET:            ${{ secrets.R2_BUCKET }}
-          R2_ENDPOINT:          ${{ secrets.R2_ENDPOINT }}
-          R2_BASE_URL:          ${{ secrets.R2_BASE_URL }}
-          R2_ACCESS_KEY_ID:     ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BASE_URL: ${{ secrets.R2_BASE_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
           node scripts/run-audit.js \
@@ -88,9 +79,9 @@ jobs:
 
       - name: Aggregate metrics → dashboard-data.json
         env:
-          R2_BUCKET:            ${{ secrets.R2_BUCKET }}
-          R2_ENDPOINT:          ${{ secrets.R2_ENDPOINT }}
-          R2_BASE_URL:          ${{ secrets.R2_BASE_URL }}
-          R2_ACCESS_KEY_ID:     ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BASE_URL: ${{ secrets.R2_BASE_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: node scripts/aggregate-metrics.js
