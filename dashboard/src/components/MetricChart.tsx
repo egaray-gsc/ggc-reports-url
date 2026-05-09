@@ -59,7 +59,7 @@ const CustomTooltip = ({
   activeMetric,
 }: {
   active?: boolean;
-  payload?: Array<{ color: string; name: string; value: number; payload: RunMetrics }>;
+  payload?: Array<{ color: string; name: string; value: number; dataKey: string; payload: Record<string, unknown> }>;
   label?: string;
   activeMetric: MetricKey;
 }) => {
@@ -70,7 +70,8 @@ const CustomTooltip = ({
     <div className="chart-tooltip">
       <p className="tooltip-date">{label}</p>
       {payload.map((entry) => {
-        const run = entry.payload;
+        const run = entry.payload[`__run_${entry.dataKey}`] as RunMetrics | undefined;
+        if (!run) return null;
         const display = getDisplayValue(run, activeMetric);
         const score = getScore(run, activeMetric);
         return (
