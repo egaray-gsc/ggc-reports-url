@@ -94,6 +94,58 @@ function loadCookies() {
   }));
 }
 
+const NUM_RUNS = 3;
+
+const LIGHTHOUSE_CONFIG = {
+  extends: 'lighthouse:default',
+  settings: {
+    formFactor: 'mobile',
+    screenEmulation: { mobile: true, width: 375, height: 812, deviceScaleFactor: 3 },
+    throttlingMethod: 'simulate',
+    onlyCategories: ['performance'],
+    disableStorageReset: true,
+    maxWaitForLoad: 90_000,
+  },
+};
+
+// ---------- mediana de N runs ----------
+
+function median(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.floor(sorted.length / 2)];
+}
+
+function medianMetrics(allMetrics) {
+  const result = { ...allMetrics[0] };
+
+  const perfScores = allMetrics.map((m) => m.performanceScore).filter((v) => v != null);
+  result.performanceScore = perfScores.length ? median(perfScores) : null;
+
+  for (const key of ['lcp', 'fcp', 'cls', 'tbt', 'tti', 'speedIndex', 'inp']) {
+    const valid = allMetrics.map((m) => m[key]).filter((e) => e?.value != null);
+    if (!valid.length) { result[key] = null; continue; }
+    const sorted = [...valid].sort((a, b) => a.value - b.value);
+    result[key] = sorted[Math.floor(sorted.length / 2)];
+  }
+
+  const lcpSorted = allMetrics
+    .filter((m) => m.lcp?.value != null)
+    .sort((a, b) => a.lcp.value - b.lcp.value);
+  if (lcpSorted.length) result.lcpElement = lcpSorted[Math.floor(lcpSorted.length / 2)].lcpElement;
+
+  return result;
+}
+
+function pickMedianLhr(lhrs) {
+  const sorted = [...lhrs]
+    .filter((lhr) => lhr.audits?.['largest-contentful-paint']?.numericValue != null)
+    .sort((a, b) =>
+      a.audits['largest-contentful-paint'].numericValue -
+      b.audits['largest-contentful-paint'].numericValue,
+    );
+  return sorted[Math.floor(sorted.length / 2)] ?? lhrs[0];
+}
+
 // ---------- pipeline principal ----------
 async function main() {
   await runAcceptCookies();
@@ -110,13 +162,11 @@ async function main() {
   try {
     const page = await browser.newPage();
 
-    // Inyectar cookies (mismo patrón que hooks del proyecto hermano)
     if (cookies.length > 0) {
       await page.setCookie(...cookies);
       console.log(`🍪 ${cookies.length} cookies inyectadas`);
     }
 
-    // Inyectar localStorage para Didomi antes de cada nueva navegación
     if (didomiCookie || euCookie) {
       await page.evaluateOnNewDocument(
         (didomiVal, euVal) => {
@@ -130,36 +180,27 @@ async function main() {
       );
     }
 
-    // startFlow usa el page de Puppeteer → hereda cookies y scripts de evaluateOnNewDocument
-    console.log('🔦 Lanzando Lighthouse...');
-    const flow = await startFlow(page, {
-      config: {
-        extends: 'lighthouse:default',
-        settings: {
-          formFactor: 'mobile',
-          screenEmulation: {
-            mobile: true,
-            width: 375,
-            height: 812,
-            deviceScaleFactor: 3,
-          },
-          throttlingMethod: 'simulate',
-          onlyCategories: ['performance'],
-          disableStorageReset: true,
-          maxWaitForLoad: 90_000,
-        },
-      },
-    });
+    const lhrs = [];
+    for (let i = 0; i < NUM_RUNS; i++) {
+      console.log(`\n🔦 Lighthouse — iteración ${i + 1}/${NUM_RUNS}...`);
+      const flow = await startFlow(page, { config: LIGHTHOUSE_CONFIG });
+      await flow.navigate(url, { stepName: slug });
+      const flowResult = await flow.createFlowResult();
+      const lhr = flowResult.steps[0].lhr;
+      lhrs.push(lhr);
 
-    await flow.navigate(url, { stepName: slug });
+      const perf = lhr.categories?.performance?.score != null
+        ? Math.round(lhr.categories.performance.score * 100)
+        : 'N/A';
+      const lcpVal = lhr.audits?.['largest-contentful-paint']?.displayValue ?? 'N/A';
+      console.log(`   → Perf: ${perf}  LCP: ${lcpVal}`);
+    }
 
-    const flowResult = await flow.createFlowResult();
-    const lhr = flowResult.steps[0].lhr;
+    const allMetrics = lhrs.map((lhr) => extractCwv(lhr, { slug, url, label, timestamp }));
+    const metrics = medianMetrics(allMetrics);
+    const htmlReport = /** @type {string} */ (generateReport(pickMedianLhr(lhrs), 'html'));
 
-    const htmlReport = /** @type {string} */ (generateReport(lhr, 'html'));
-    const metrics = extractCwv(lhr, { slug, url, label, timestamp });
-
-    console.log(`\n📊 Métricas extraídas:`);
+    console.log(`\n📊 Métricas medianas (${NUM_RUNS} runs):`);
     console.log(`   Performance: ${metrics.performanceScore}`);
     console.log(`   LCP: ${metrics.lcp?.displayValue ?? 'N/A'}`);
     console.log(`   CLS: ${metrics.cls?.displayValue ?? 'N/A'}`);
