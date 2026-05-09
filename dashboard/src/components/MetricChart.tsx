@@ -7,10 +7,18 @@ import {
   Tooltip,
   Legend,
   ReferenceArea,
+  ReferenceLine,
   ResponsiveContainer,
 } from 'recharts';
 import { METRICS, URL_COLORS } from '../types';
 import type { DashboardData, MetricKey, RunMetrics } from '../types';
+import milestonesConfig from '../milestones.json';
+
+interface MilestoneConfig {
+  date: string;
+  label: string;
+  color?: string;
+}
 
 interface Props {
   data: DashboardData;
@@ -114,6 +122,20 @@ export function MetricChart({ data, activeMetric }: Props) {
     return entry;
   });
 
+  // Resolver cada hito al timestamp más cercano disponible en los datos
+  const milestones = (milestonesConfig as MilestoneConfig[]).flatMap((m) => {
+    if (allTimestamps.length === 0) return [];
+    const exact = allTimestamps.find((ts) => ts.startsWith(m.date));
+    if (exact) return [{ ...m, ts: exact }];
+    const mTime = new Date(m.date).getTime();
+    const nearest = allTimestamps.reduce((prev, curr) =>
+      Math.abs(new Date(curr).getTime() - mTime) < Math.abs(new Date(prev).getTime() - mTime)
+        ? curr
+        : prev,
+    );
+    return [{ ...m, ts: nearest }];
+  });
+
   // Rango del eje Y con margen
   const allValues = data.urls.flatMap((u) =>
     u.runs.map((r) => getMetricValue(r, activeMetric)).filter((v): v is number => v != null),
@@ -169,6 +191,23 @@ export function MetricChart({ data, activeMetric }: Props) {
           }
         />
         <Legend wrapperStyle={{ paddingTop: 12, fontSize: 12 }} />
+
+        {milestones.map((m) => (
+          <ReferenceLine
+            key={`${m.ts}-${m.label}`}
+            x={m.ts}
+            stroke={m.color ?? '#a78bfa'}
+            strokeDasharray="4 3"
+            strokeWidth={1.5}
+            label={{
+              value: m.label,
+              position: 'insideTopRight',
+              fill: m.color ?? '#a78bfa',
+              fontSize: 10,
+              fontWeight: 500,
+            }}
+          />
+        ))}
 
         {data.urls.map((urlData, i) => (
           <Line
