@@ -17,7 +17,6 @@ export interface RunMetrics {
   tbt: MetricValue | null;
   tti: MetricValue | null;
   speedIndex: MetricValue | null;
-  inp: MetricValue | null;
   lcpElement: string | null;
   reportUrl: string;
 }
@@ -41,7 +40,6 @@ export type MetricKey =
   | 'tbt'
   | 'tti'
   | 'speedIndex'
-  | 'inp'
   | 'performanceScore';
 
 export interface MetricMeta {
@@ -60,7 +58,6 @@ export const METRICS: MetricMeta[] = [
   { key: 'tbt',              label: 'TBT',         unit: 'ms', thresholds: [200, 600],   higherIsBetter: false },
   { key: 'tti',              label: 'TTI',         unit: 'ms', thresholds: [3800, 7300], higherIsBetter: false },
   { key: 'speedIndex',       label: 'Speed Index', unit: 'ms', thresholds: [3400, 5800], higherIsBetter: false },
-  { key: 'inp',              label: 'INP',         unit: 'ms', thresholds: [200, 500],   higherIsBetter: false },
   { key: 'performanceScore', label: 'Score',       unit: '',   thresholds: [90, 50],     higherIsBetter: true  },
 ];
 

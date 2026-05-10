@@ -39,7 +39,6 @@ export function extractCwv(lhr, { slug, url, label, timestamp }) {
     tbt:        getAudit(lhr, 'total-blocking-time'),
     tti:        getAudit(lhr, 'interactive'),
     speedIndex: getAudit(lhr, 'speed-index'),
-    inp:        getAudit(lhr, 'interaction-to-next-paint'),
     lcpElement,
     reportUrl,
   };

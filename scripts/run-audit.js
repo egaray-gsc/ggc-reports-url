@@ -121,7 +121,7 @@ function medianMetrics(allMetrics) {
   const perfScores = allMetrics.map((m) => m.performanceScore).filter((v) => v != null);
   result.performanceScore = perfScores.length ? median(perfScores) : null;
 
-  for (const key of ['lcp', 'fcp', 'cls', 'tbt', 'tti', 'speedIndex', 'inp']) {
+  for (const key of ['lcp', 'fcp', 'cls', 'tbt', 'tti', 'speedIndex']) {
     const valid = allMetrics.map((m) => m[key]).filter((e) => e?.value != null);
     if (!valid.length) { result[key] = null; continue; }
     const sorted = [...valid].sort((a, b) => a.value - b.value);
