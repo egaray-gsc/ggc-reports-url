@@ -167,6 +167,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.8rem;
+  text-align: left;
 }
 
 .url-table th {
