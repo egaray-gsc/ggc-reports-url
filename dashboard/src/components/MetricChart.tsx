@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   LineChart,
   Line,
@@ -5,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ReferenceArea,
   ReferenceLine,
   ResponsiveContainer,
@@ -104,6 +104,24 @@ const CustomTooltip = ({
 
 export function MetricChart({ data, activeMetric }: Props) {
   const meta = METRICS.find((m) => m.key === activeMetric)!;
+  const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    setSelectedSlugs(new Set());
+  }, [data]);
+
+  const handleLegendClick = (slug: string) => {
+    setSelectedSlugs((prev) => {
+      const next = new Set(prev);
+      if (next.has(slug)) {
+        next.delete(slug);
+      } else {
+        next.add(slug);
+      }
+      return next;
+    });
+  };
+
   const [t1, t2] = meta.thresholds;
 
   // Construir dataset: una entrada por timestamp único (permite múltiples auditorías el mismo día)
@@ -155,6 +173,7 @@ export function MetricChart({ data, activeMetric }: Props) {
   const badBottom  = meta.higherIsBetter ? yMin  : t2;
 
   return (
+    <div>
     <ResponsiveContainer width="100%" height={360}>
       <LineChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -191,7 +210,6 @@ export function MetricChart({ data, activeMetric }: Props) {
             <CustomTooltip activeMetric={activeMetric} />
           }
         />
-        <Legend wrapperStyle={{ paddingTop: 12, fontSize: 12 }} />
 
         {milestones.map((m) => (
           <ReferenceLine
@@ -221,9 +239,39 @@ export function MetricChart({ data, activeMetric }: Props) {
             dot={{ r: 3 }}
             activeDot={{ r: 5 }}
             connectNulls={false}
+            hide={selectedSlugs.size > 0 && !selectedSlugs.has(urlData.slug)}
           />
         ))}
       </LineChart>
     </ResponsiveContainer>
+
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', paddingTop: 10 }}>
+      {data.urls.map((urlData, i) => {
+        const color = URL_COLORS[i % URL_COLORS.length];
+        const isSelected = selectedSlugs.has(urlData.slug);
+        const isActive = selectedSlugs.size === 0 || isSelected;
+        return (
+          <div
+            key={urlData.slug}
+            onClick={() => handleLegendClick(urlData.slug)}
+            style={{
+              cursor: 'pointer',
+              opacity: isActive ? 1 : 0.3,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              fontSize: 12,
+              fontWeight: isSelected && selectedSlugs.size > 0 ? 700 : 400,
+              transition: 'opacity 0.15s',
+              userSelect: 'none',
+            }}
+          >
+            <span style={{ display: 'inline-block', width: 18, height: 3, background: color, borderRadius: 2, flexShrink: 0 }} />
+            <span style={{ color: '#d1d5db' }}>{urlData.label}</span>
+          </div>
+        );
+      })}
+    </div>
+  </div>
   );
 }
