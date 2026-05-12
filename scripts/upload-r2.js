@@ -44,11 +44,11 @@ export async function uploadReport(slug, timestamp, metricsJson, reportHtml) {
 }
 
 /**
- * Sube el fichero dashboard-data.json en la raíz del bucket.
+ * Sube el fichero dashboard-data en la raíz del bucket.
  */
-export async function uploadDashboardData(json) {
+export async function uploadDashboardData(json, filename = 'dashboard-data.json') {
   await putObject(
-    'reports-url/dashboard-data.json',
+    `reports-url/${filename}`,
     json,
     'application/json',
     'public, max-age=300',

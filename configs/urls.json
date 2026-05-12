@@ -1,14 +1,14 @@
 [
   {
-    "slug": "Home LV",
+    "slug": "Home",
     "url": "https://www.lavanguardia.com/",
-    "label": "LV - Home",
+    "label": "Home",
     "cookieDomain": "lavanguardia.com"
   },
   {
-    "slug": "Story LV",
+    "slug": "Story",
     "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
-    "label": "LV - Story",
+    "label": "Story",
     "cookieDomain": "lavanguardia.com"
   }
 ]

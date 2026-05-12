@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * Lee todos los metrics.json del bucket R2, los agrupa por slug
- * y genera dashboard-data.json en la raíz del bucket.
+ * y genera el dashboard-data correspondiente en la raíz del bucket.
  *
- * Uso: node scripts/aggregate-metrics.js
+ * Uso: node scripts/aggregate-metrics.js --urls configs/urls-lv.json --output dashboard-data-lv.json
  */
 
 import {
@@ -11,6 +11,7 @@ import {
   ListObjectsV2Command,
   GetObjectCommand,
 } from '@aws-sdk/client-s3';
+import { readFileSync } from 'fs';
 import { uploadDashboardData } from './upload-r2.js';
 
 const client = new S3Client({
@@ -24,6 +25,14 @@ const client = new S3Client({
 
 const BASE_PREFIX = 'reports-url/';
 const METRICS_RE = /^reports-url\/[^/]+\/[^/]+\/metrics\.json$/;
+
+// Parse CLI args
+const args = process.argv.slice(2);
+const urlsFile = args[args.indexOf('--urls') + 1] ?? 'configs/urls.json';
+const outputFile = args[args.indexOf('--output') + 1] ?? 'dashboard-data.json';
+
+const urlsConfig = JSON.parse(readFileSync(urlsFile, 'utf-8'));
+const allowedSlugs = new Set(urlsConfig.map((u) => u.slug));
 
 async function listAllMetricsKeys() {
   const keys = [];
@@ -61,9 +70,9 @@ async function readJson(key) {
 }
 
 async function main() {
-  console.log('📋 Listando metrics.json en R2...');
+  console.log(`📋 Listando metrics.json en R2 (${urlsFile} → ${outputFile})...`);
   const keys = await listAllMetricsKeys();
-  console.log(`  Encontrados ${keys.length} ficheros`);
+  console.log(`  Encontrados ${keys.length} ficheros en total`);
 
   const bySlug = new Map();
 
@@ -71,6 +80,8 @@ async function main() {
     try {
       const metrics = await readJson(key);
       const { slug, label, url } = metrics;
+
+      if (!allowedSlugs.has(slug)) continue;
 
       if (!bySlug.has(slug)) {
         bySlug.set(slug, { slug, label, url, runs: [] });
@@ -92,11 +103,11 @@ async function main() {
   };
 
   const json = JSON.stringify(dashboardData, null, 2);
-  console.log('\n☁️  Subiendo dashboard-data.json...');
-  await uploadDashboardData(json);
+  console.log(`\n☁️  Subiendo ${outputFile}...`);
+  await uploadDashboardData(json, outputFile);
 
   console.log(
-    `✅ dashboard-data.json generado con ${bySlug.size} URLs y ${keys.length} runs en total`,
+    `✅ ${outputFile} generado con ${bySlug.size} URLs y ${Array.from(bySlug.values()).reduce((s, u) => s + u.runs.length, 0)} runs en total`,
   );
 }
 

@@ -18,10 +18,20 @@
 .header { background: var(--surface); border-bottom: 1px solid var(--border); }
 .header-inner {
   max-width: 1200px; margin: 0 auto; padding: 16px 24px;
-  display: flex; align-items: baseline; gap: 16px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
 }
 .title   { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
-.updated { font-size: 0.75rem; color: var(--text-muted); }
+.updated { font-size: 0.75rem; color: var(--text-muted); margin-left: auto; }
+
+/* ── Site nav ── */
+.site-nav { display: flex; gap: 4px; }
+.site-btn {
+  padding: 6px 16px; border-radius: 6px; border: 1px solid var(--border);
+  background: transparent; color: var(--text-muted); cursor: pointer;
+  font-size: 0.85rem; font-weight: 500; transition: all .15s;
+}
+.site-btn:hover  { border-color: var(--accent); color: var(--text); }
+.site-btn.active { background: var(--accent); border-color: var(--accent); color: #0e0f11; font-weight: 700; }
 .main    { max-width: 1200px; margin: 0 auto; padding: 24px; width: 100%; flex: 1; }
 
 /* ── Toggle ── */
