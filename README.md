@@ -1,0 +1,124 @@
+# ggc-reports-url
+
+Sistema de monitoratge de Core Web Vitals (CWV) per GSC. Executa auditories Lighthouse sobre les URLs objectiu, emmagatzema els resultats a Cloudflare R2 i ofereix un tauler React amb l'evolució històrica del rendiment.
+
+## Com funciona
+
+```
+configs/urls-{site}.json
+  → scripts/run-audit.js        # Puppeteer + Lighthouse per slug
+      ├── accept-cookies.js     # Gestiona els banners de consentiment Didomi / OneTrust
+      ├── extract-cwv.js        # Analitza LHR → metrics.json
+      └── upload-r2.js          # Puja metrics.json + report.html
+  → scripts/aggregate-metrics.js
+      └── upload-r2.js          # Puja dashboard-data-{site}.json
+  → dashboard/                  # React + Vite, desplegat a GitHub Pages
+```
+
+Les auditories s'executen amb configuració mòbil (375×812, limitació de xarxa simulada, només categoria de rendiment). La injecció de cookies persisteix entre navegacions, de manera que els banners de consentiment es gestionen abans que s'activi Lighthouse.
+
+## Estructura d'emmagatzematge a R2
+
+```
+reports-url/
+  {slug}/{timestamp}/metrics.json     # mètriques CWV per auditoria
+  {slug}/{timestamp}/report.html      # informe HTML complet de Lighthouse
+  dashboard-data-lv.json              # sèries temporals agregades — La Vanguardia
+  dashboard-data-md.json              # sèries temporals agregades — Mundo Deportivo
+```
+
+## Llocs objectiu
+
+| Fitxer                 | Lloc            | Slugs                                             |
+| ---------------------- | --------------- | ------------------------------------------------- |
+| `configs/urls-lv.json` | La Vanguardia   | Home, Story                                       |
+| `configs/urls-md.json` | Mundo Deportivo | Home, Section, Story, Video Story, Solomoto Story |
+
+## Configuració
+
+### Requisits previs
+
+- Node.js 22
+- Chrome (instal·lat localment o via `browser-actions/setup-chrome` al CI)
+
+### Instal·lació
+
+```bash
+npm install
+```
+
+### Variables d'entorn
+
+Copia `.env.example` a `.env` i omple les credencials de Cloudflare R2:
+
+```
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=
+R2_BUCKET=
+R2_ENDPOINT=https://<accountId>.r2.cloudflarestorage.com
+R2_BASE_URL=https://<public-url>
+```
+
+## Ús
+
+### Executar una auditoria en local
+
+```bash
+node scripts/run-audit.js --slug Home --timestamp 2026-05-12_120000 --urls configs/urls-lv.json
+```
+
+### Agregar mètriques
+
+```bash
+node scripts/aggregate-metrics.js --urls configs/urls-lv.json --output dashboard-data-lv.json
+```
+
+### Provar la lògica de cookies
+
+```bash
+node scripts/accept-cookies.js
+```
+
+## Tauler
+
+```bash
+cd dashboard
+npm install
+npm run dev      # servidor de desenvolupament a http://localhost:5173
+npm run build    # build de producció → dist/
+npm run lint
+```
+
+El tauler requereix `VITE_R2_BASE_URL` en temps de build (definit com a variable d'entorn o secret de GitHub Actions).
+
+## CI/CD
+
+| Workflow               | Activació                          | Què fa                                                    |
+| ---------------------- | ---------------------------------- | --------------------------------------------------------- |
+| `cwv-audit-lv.yml`     | Programat (cada 6 h) + manual      | Audita tots els slugs de LV en paral·lel i després agrega |
+| `cwv-audit-md.yml`     | Programat (cada 6 h) + manual      | Audita tots els slugs de MD en paral·lel i després agrega |
+| `deploy-dashboard.yml` | Push a `main` sobre `dashboard/**` | Compila i desplega a GitHub Pages                         |
+
+Els workflows d'auditoria generen un timestamp en zona horària de Madrid, construeixen una matriu de slugs a partir del fitxer de configuració d'URLs i executen cada slug com a job paral·lel. L'agregació s'executa un cop totes les auditories han acabat (fins i tot si alguna ha fallat).
+
+## Scripts
+
+| Script                         | Propòsit                                                                                            |
+| ------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `scripts/run-audit.js`         | Orquestrador — Puppeteer + Lighthouse + pujada                                                      |
+| `scripts/accept-cookies.js`    | Detecta i fa clic als botons de consentiment; desa les cookies a `/tmp/consent-cookies-{slug}.json` |
+| `scripts/extract-cwv.js`       | Analitza LHR JSON → mètriques estructurades (LCP, CLS, FCP, TBT, TTFB, subfases de LCP)             |
+| `scripts/upload-r2.js`         | Pujada R2 compatible amb S3 (`uploadReport`, `uploadDashboardData`)                                 |
+| `scripts/aggregate-metrics.js` | Escaneja tots els objectes de R2, agrupa per slug, escriu `dashboard-data-{site}.json`              |
+
+## Components del tauler
+
+| Component               | Descripció                                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `App.tsx`               | Obté les dades del tauler, gestiona l'estat de selecció de mètriques                                               |
+| `MetricChart.tsx`       | Gràfic de línies amb bandes de llindar de Web Vitals (verd/groc/vermell) i enllaços als informes de Lighthouse     |
+| `types.ts`              | Tipus `MetricKey`, `RunMetrics`, `DashboardData` i valors de llindar                                               |
+
+## Relacionat
+
+- `ggc-reports-ci` — repositori complementari per a auditories gestionades per Unlighthouse via crawler per dominis complets (mateix workspace, `reports-ws.code-workspace`)
