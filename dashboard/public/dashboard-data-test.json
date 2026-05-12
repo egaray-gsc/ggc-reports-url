@@ -1,0 +1,1779 @@
+{
+    "generatedAt": "2026-05-11T08:59:21.830Z",
+    "urls": [
+        {
+            "slug": "Home LV",
+            "label": "LV - Home",
+            "url": "https://www.lavanguardia.com/",
+            "runs": [
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_134912",
+                    "performanceScore": 28,
+                    "lcp": {
+                        "value": 58862.38537999996,
+                        "score": 0,
+                        "displayValue": "58.9 s",
+                        "phases": null
+                    },
+                    "fcp": {
+                        "value": 3648.1700000000005,
+                        "score": 0.31,
+                        "displayValue": "3.6 s"
+                    },
+                    "cls": {
+                        "value": 0.017715,
+                        "score": 1,
+                        "displayValue": "0.018"
+                    },
+                    "tbt": {
+                        "value": 8325.999999999978,
+                        "score": 0,
+                        "displayValue": "8,330 ms"
+                    },
+                    "tti": {
+                        "value": 59302.87494024994,
+                        "score": 0,
+                        "displayValue": "59.3 s"
+                    },
+                    "speedIndex": {
+                        "value": 17076.56408225714,
+                        "score": 0,
+                        "displayValue": "17.1 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/Home LV/2026-04-30_134912/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_135353",
+                    "performanceScore": 26,
+                    "lcp": {
+                        "value": 58323.30077291197,
+                        "score": 0,
+                        "displayValue": "58.3 s",
+                        "phases": null
+                    },
+                    "fcp": {
+                        "value": 5338.0792,
+                        "score": 0.07,
+                        "displayValue": "5.3 s"
+                    },
+                    "cls": {
+                        "value": 0.016532,
+                        "score": 1,
+                        "displayValue": "0.017"
+                    },
+                    "tbt": {
+                        "value": 9778.000000000007,
+                        "score": 0,
+                        "displayValue": "9,780 ms"
+                    },
+                    "tti": {
+                        "value": 59728.85935754293,
+                        "score": 0,
+                        "displayValue": "59.7 s"
+                    },
+                    "speedIndex": {
+                        "value": 17018.38081887346,
+                        "score": 0,
+                        "displayValue": "17.0 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/Home LV/2026-04-30_135353/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_171216",
+                    "performanceScore": 29,
+                    "lcp": {
+                        "value": 9340.806499999999,
+                        "score": 0.01,
+                        "displayValue": "9.3 s"
+                    },
+                    "fcp": {
+                        "value": 3593.0325000000003,
+                        "score": 0.32,
+                        "displayValue": "3.6 s"
+                    },
+                    "cls": {
+                        "value": 0.014787,
+                        "score": 1,
+                        "displayValue": "0.015"
+                    },
+                    "tbt": {
+                        "value": 8212.999999999993,
+                        "score": 0,
+                        "displayValue": "8,210 ms"
+                    },
+                    "tti": {
+                        "value": 51856.55869474994,
+                        "score": 0,
+                        "displayValue": "51.9 s"
+                    },
+                    "speedIndex": {
+                        "value": 12169.706532010407,
+                        "score": 0.03,
+                        "displayValue": "12.2 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-04-30_171216/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_171227",
+                    "performanceScore": 26,
+                    "lcp": {
+                        "value": 11432.201999999997,
+                        "score": 0,
+                        "displayValue": "11.4 s"
+                    },
+                    "fcp": {
+                        "value": 4740.442999999999,
+                        "score": 0.12,
+                        "displayValue": "4.7 s"
+                    },
+                    "cls": {
+                        "value": 0.008948,
+                        "score": 1,
+                        "displayValue": "0.009"
+                    },
+                    "tbt": {
+                        "value": 11062.49999999998,
+                        "score": 0,
+                        "displayValue": "11,060 ms"
+                    },
+                    "tti": {
+                        "value": 56527.43327125002,
+                        "score": 0,
+                        "displayValue": "56.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 13769.65945637768,
+                        "score": 0.01,
+                        "displayValue": "13.8 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-04-30_171227/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-06",
+                    "timestamp": "2026-05-06_094806",
+                    "performanceScore": 27,
+                    "lcp": {
+                        "value": 8327.28925,
+                        "score": 0.02,
+                        "displayValue": "8.3 s"
+                    },
+                    "fcp": {
+                        "value": 4641.581749999999,
+                        "score": 0.13,
+                        "displayValue": "4.6 s"
+                    },
+                    "cls": {
+                        "value": 0.037841,
+                        "score": 1,
+                        "displayValue": "0.038"
+                    },
+                    "tbt": {
+                        "value": 7594.00000000002,
+                        "score": 0,
+                        "displayValue": "7,590 ms"
+                    },
+                    "tti": {
+                        "value": 52826.776707432626,
+                        "score": 0,
+                        "displayValue": "52.8 s"
+                    },
+                    "speedIndex": {
+                        "value": 13864.221880340885,
+                        "score": 0.01,
+                        "displayValue": "13.9 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-06_094806/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-07",
+                    "timestamp": "2026-05-07_090723",
+                    "performanceScore": 29,
+                    "lcp": {
+                        "value": 8146.4325,
+                        "score": 0.02,
+                        "displayValue": "8.1 s"
+                    },
+                    "fcp": {
+                        "value": 3660.709499999999,
+                        "score": 0.3,
+                        "displayValue": "3.7 s"
+                    },
+                    "cls": {
+                        "value": 0.005657,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 11286.255649999996,
+                        "score": 0,
+                        "displayValue": "11,290 ms"
+                    },
+                    "tti": {
+                        "value": 53076.671642750014,
+                        "score": 0,
+                        "displayValue": "53.1 s"
+                    },
+                    "speedIndex": {
+                        "value": 12618.298644979304,
+                        "score": 0.03,
+                        "displayValue": "12.6 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-07_090723/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-07",
+                    "timestamp": "2026-05-07_152151",
+                    "performanceScore": 28,
+                    "lcp": {
+                        "value": 65729.86312860141,
+                        "score": 0,
+                        "displayValue": "65.7 s"
+                    },
+                    "fcp": {
+                        "value": 3547.7495,
+                        "score": 0.33,
+                        "displayValue": "3.5 s"
+                    },
+                    "cls": {
+                        "value": 0.010673,
+                        "score": 1,
+                        "displayValue": "0.011"
+                    },
+                    "tbt": {
+                        "value": 22475.050500000027,
+                        "score": 0,
+                        "displayValue": "22,480 ms"
+                    },
+                    "tti": {
+                        "value": 90047.15481578064,
+                        "score": 0,
+                        "displayValue": "90.0 s"
+                    },
+                    "speedIndex": {
+                        "value": 19365.840190225506,
+                        "score": 0,
+                        "displayValue": "19.4 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-07_152151/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-07",
+                    "timestamp": "2026-05-07_212003",
+                    "performanceScore": 28,
+                    "lcp": {
+                        "value": 57151.52566999997,
+                        "score": 0,
+                        "displayValue": "57.2 s"
+                    },
+                    "fcp": {
+                        "value": 3535.6393,
+                        "score": 0.34,
+                        "displayValue": "3.5 s"
+                    },
+                    "cls": {
+                        "value": 0.005657,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 12888.030700000008,
+                        "score": 0,
+                        "displayValue": "12,890 ms"
+                    },
+                    "tti": {
+                        "value": 57544.480290206484,
+                        "score": 0,
+                        "displayValue": "57.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 15600.136736949818,
+                        "score": 0,
+                        "displayValue": "15.6 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-07_212003/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_032903",
+                    "performanceScore": 26,
+                    "lcp": {
+                        "value": 52587.92134276433,
+                        "score": 0,
+                        "displayValue": "52.6 s"
+                    },
+                    "fcp": {
+                        "value": 4565.8467949999995,
+                        "score": 0.14,
+                        "displayValue": "4.6 s"
+                    },
+                    "cls": {
+                        "value": 0.008948,
+                        "score": 1,
+                        "displayValue": "0.009"
+                    },
+                    "tbt": {
+                        "value": 15505.069604999995,
+                        "score": 0,
+                        "displayValue": "15,510 ms"
+                    },
+                    "tti": {
+                        "value": 71683.94708674995,
+                        "score": 0,
+                        "displayValue": "71.7 s"
+                    },
+                    "speedIndex": {
+                        "value": 19547.27410073184,
+                        "score": 0,
+                        "displayValue": "19.5 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-08_032903/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_091135",
+                    "performanceScore": 26,
+                    "lcp": {
+                        "value": 10655.603500000001,
+                        "score": 0,
+                        "displayValue": "10.7 s"
+                    },
+                    "fcp": {
+                        "value": 4761.33115,
+                        "score": 0.12,
+                        "displayValue": "4.8 s"
+                    },
+                    "cls": {
+                        "value": 0.033064,
+                        "score": 1,
+                        "displayValue": "0.033"
+                    },
+                    "tbt": {
+                        "value": 13503.811600000034,
+                        "score": 0,
+                        "displayValue": "13,500 ms"
+                    },
+                    "tti": {
+                        "value": 66170.95453625006,
+                        "score": 0,
+                        "displayValue": "66.2 s"
+                    },
+                    "speedIndex": {
+                        "value": 14242.794192647596,
+                        "score": 0.01,
+                        "displayValue": "14.2 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-08_091135/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_150212",
+                    "performanceScore": 26,
+                    "lcp": {
+                        "value": 12309.093,
+                        "score": 0,
+                        "displayValue": "12.3 s"
+                    },
+                    "fcp": {
+                        "value": 5574.976159999998,
+                        "score": 0.06,
+                        "displayValue": "5.6 s"
+                    },
+                    "cls": {
+                        "value": 0.008948,
+                        "score": 1,
+                        "displayValue": "0.009"
+                    },
+                    "tbt": {
+                        "value": 12391.96855000002,
+                        "score": 0,
+                        "displayValue": "12,390 ms"
+                    },
+                    "tti": {
+                        "value": 71476.5353612264,
+                        "score": 0,
+                        "displayValue": "71.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 14948.286368639147,
+                        "score": 0.01,
+                        "displayValue": "14.9 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-08_150212/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_205957",
+                    "performanceScore": 29,
+                    "lcp": {
+                        "value": 7938.186999999999,
+                        "score": 0.03,
+                        "displayValue": "7.9 s"
+                    },
+                    "fcp": {
+                        "value": 3632.7918600000003,
+                        "score": 0.31,
+                        "displayValue": "3.6 s"
+                    },
+                    "cls": {
+                        "value": 0.029575,
+                        "score": 1,
+                        "displayValue": "0.03"
+                    },
+                    "tbt": {
+                        "value": 40515.06314000007,
+                        "score": 0,
+                        "displayValue": "40,520 ms"
+                    },
+                    "tti": {
+                        "value": 96633.2683997005,
+                        "score": 0,
+                        "displayValue": "96.6 s"
+                    },
+                    "speedIndex": {
+                        "value": 30444.143816224787,
+                        "score": 0,
+                        "displayValue": "30.4 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-08_205957/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_032551",
+                    "performanceScore": 28,
+                    "lcp": {
+                        "value": 8598.6495,
+                        "score": 0.01,
+                        "displayValue": "8.6 s"
+                    },
+                    "fcp": {
+                        "value": 3753.0892000000003,
+                        "score": 0.28,
+                        "displayValue": "3.8 s"
+                    },
+                    "cls": {
+                        "value": 0.014787,
+                        "score": 1,
+                        "displayValue": "0.015"
+                    },
+                    "tbt": {
+                        "value": 10679.000000000033,
+                        "score": 0,
+                        "displayValue": "10,680 ms"
+                    },
+                    "tti": {
+                        "value": 58752.619678714895,
+                        "score": 0,
+                        "displayValue": "58.8 s"
+                    },
+                    "speedIndex": {
+                        "value": 15008.205041409483,
+                        "score": 0.01,
+                        "displayValue": "15.0 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-09_032551/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_092807",
+                    "performanceScore": 25,
+                    "lcp": {
+                        "value": 12372.981175,
+                        "score": 0,
+                        "displayValue": "12.4 s"
+                    },
+                    "fcp": {
+                        "value": 8402.71645,
+                        "score": 0,
+                        "displayValue": "8.4 s"
+                    },
+                    "cls": {
+                        "value": 0.033064,
+                        "score": 1,
+                        "displayValue": "0.033"
+                    },
+                    "tbt": {
+                        "value": 44982.50000000003,
+                        "score": 0,
+                        "displayValue": "44,980 ms"
+                    },
+                    "tti": {
+                        "value": 138930.35964345728,
+                        "score": 0,
+                        "displayValue": "138.9 s"
+                    },
+                    "speedIndex": {
+                        "value": 17891.638851082582,
+                        "score": 0,
+                        "displayValue": "17.9 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-09_092807/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_144356",
+                    "performanceScore": 29,
+                    "lcp": {
+                        "value": 7040.363999999999,
+                        "score": 0.06,
+                        "displayValue": "7.0 s"
+                    },
+                    "fcp": {
+                        "value": 3901.704,
+                        "score": 0.25,
+                        "displayValue": "3.9 s"
+                    },
+                    "cls": {
+                        "value": 0.010673,
+                        "score": 1,
+                        "displayValue": "0.011"
+                    },
+                    "tbt": {
+                        "value": 7115.636024999982,
+                        "score": 0,
+                        "displayValue": "7,120 ms"
+                    },
+                    "tti": {
+                        "value": 57136.34070664924,
+                        "score": 0,
+                        "displayValue": "57.1 s"
+                    },
+                    "speedIndex": {
+                        "value": 13652.353507582955,
+                        "score": 0.02,
+                        "displayValue": "13.7 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-09_144356/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_203937",
+                    "performanceScore": 28,
+                    "lcp": {
+                        "value": 10957.091999999997,
+                        "score": 0,
+                        "displayValue": "11.0 s"
+                    },
+                    "fcp": {
+                        "value": 3776.749499999999,
+                        "score": 0.28,
+                        "displayValue": "3.8 s"
+                    },
+                    "cls": {
+                        "value": 0.010673,
+                        "score": 1,
+                        "displayValue": "0.011"
+                    },
+                    "tbt": {
+                        "value": 5000.126812088027,
+                        "score": 0,
+                        "displayValue": "5,000 ms"
+                    },
+                    "tti": {
+                        "value": 56867.40973170315,
+                        "score": 0,
+                        "displayValue": "56.9 s"
+                    },
+                    "speedIndex": {
+                        "value": 17694.275432711333,
+                        "score": 0,
+                        "displayValue": "17.7 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-09_203937/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-10",
+                    "timestamp": "2026-05-10_032721",
+                    "performanceScore": 26,
+                    "lcp": {
+                        "value": 14520.104000000003,
+                        "score": 0,
+                        "displayValue": "14.5 s"
+                    },
+                    "fcp": {
+                        "value": 5078.97925,
+                        "score": 0.09,
+                        "displayValue": "5.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005657,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 3743.3332660577544,
+                        "score": 0.01,
+                        "displayValue": "3,740 ms"
+                    },
+                    "tti": {
+                        "value": 58443.613577336546,
+                        "score": 0,
+                        "displayValue": "58.4 s"
+                    },
+                    "speedIndex": {
+                        "value": 18666.834353757462,
+                        "score": 0,
+                        "displayValue": "18.7 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-10_032721/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-10",
+                    "timestamp": "2026-05-10_095019",
+                    "performanceScore": 10,
+                    "lcp": {
+                        "value": 12880.121468190402,
+                        "score": 0,
+                        "displayValue": "12.9 s"
+                    },
+                    "fcp": {
+                        "value": 8859.022267441916,
+                        "score": 0,
+                        "displayValue": "8.9 s"
+                    },
+                    "cls": {
+                        "value": 0.29242,
+                        "score": 0.41,
+                        "displayValue": "0.292"
+                    },
+                    "tbt": {
+                        "value": 8336.999999999989,
+                        "score": 0,
+                        "displayValue": "8,340 ms"
+                    },
+                    "tti": {
+                        "value": 63822.99342884561,
+                        "score": 0,
+                        "displayValue": "63.8 s"
+                    },
+                    "speedIndex": {
+                        "value": 14628.179869151336,
+                        "score": 0.01,
+                        "displayValue": "14.6 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-10_095019/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-10",
+                    "timestamp": "2026-05-10_144431",
+                    "performanceScore": 27,
+                    "lcp": {
+                        "value": 3803.435622678223,
+                        "score": 0.55,
+                        "displayValue": "3.8 s"
+                    },
+                    "fcp": {
+                        "value": 3720.909909508057,
+                        "score": 0.29,
+                        "displayValue": "3.7 s"
+                    },
+                    "cls": {
+                        "value": 0.29242,
+                        "score": 0.41,
+                        "displayValue": "0.292"
+                    },
+                    "tbt": {
+                        "value": 40130.41300000006,
+                        "score": 0,
+                        "displayValue": "40,130 ms"
+                    },
+                    "tti": {
+                        "value": 76644.55613250006,
+                        "score": 0,
+                        "displayValue": "76.6 s"
+                    },
+                    "speedIndex": {
+                        "value": 15906.417445216855,
+                        "score": 0,
+                        "displayValue": "15.9 s"
+                    },
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-10_144431/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-10",
+                    "timestamp": "2026-05-10_204056",
+                    "performanceScore": 50,
+                    "lcp": {
+                        "value": 3656.1875,
+                        "score": 0.59,
+                        "displayValue": "3.7 s"
+                    },
+                    "fcp": {
+                        "value": 2315.884079571533,
+                        "score": 0.74,
+                        "displayValue": "2.3 s"
+                    },
+                    "cls": {
+                        "value": 0.020958,
+                        "score": 1,
+                        "displayValue": "0.021"
+                    },
+                    "tbt": {
+                        "value": 8359.373000000007,
+                        "score": 0,
+                        "displayValue": "8,360 ms"
+                    },
+                    "tti": {
+                        "value": 50723.29877185118,
+                        "score": 0,
+                        "displayValue": "50.7 s"
+                    },
+                    "speedIndex": {
+                        "value": 9377.88758277812,
+                        "score": 0.12,
+                        "displayValue": "9.4 s"
+                    },
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-10_204056/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-11",
+                    "timestamp": "2026-05-11_034543",
+                    "performanceScore": 61,
+                    "lcp": {
+                        "value": 2625.8813,
+                        "score": 0.87,
+                        "displayValue": "2.6 s"
+                    },
+                    "fcp": {
+                        "value": 1666.310854284668,
+                        "score": 0.93,
+                        "displayValue": "1.7 s"
+                    },
+                    "cls": {
+                        "value": 0.008948,
+                        "score": 1,
+                        "displayValue": "0.009"
+                    },
+                    "tbt": {
+                        "value": 7259.500000000004,
+                        "score": 0,
+                        "displayValue": "7,260 ms"
+                    },
+                    "tti": {
+                        "value": 28308.49238208522,
+                        "score": 0,
+                        "displayValue": "28.3 s"
+                    },
+                    "speedIndex": {
+                        "value": 7296.076611294407,
+                        "score": 0.29,
+                        "displayValue": "7.3 s"
+                    },
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-11_034543/report.html"
+                },
+                {
+                    "slug": "Home LV",
+                    "url": "https://www.lavanguardia.com/",
+                    "label": "LV - Home",
+                    "runDate": "2026-05-11",
+                    "timestamp": "2026-05-11_105056",
+                    "performanceScore": 34,
+                    "lcp": {
+                        "value": 9985.286978231808,
+                        "score": 0,
+                        "displayValue": "10.0 s"
+                    },
+                    "fcp": {
+                        "value": 1794.568,
+                        "score": 0.9,
+                        "displayValue": "1.8 s"
+                    },
+                    "cls": {
+                        "value": 0.033064,
+                        "score": 1,
+                        "displayValue": "0.033"
+                    },
+                    "tbt": {
+                        "value": 44825.99999999994,
+                        "score": 0,
+                        "displayValue": "44,830 ms"
+                    },
+                    "tti": {
+                        "value": 71552.84839999994,
+                        "score": 0,
+                        "displayValue": "71.6 s"
+                    },
+                    "speedIndex": {
+                        "value": 12656.984183641962,
+                        "score": 0.03,
+                        "displayValue": "12.7 s"
+                    },
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Home%20LV/2026-05-11_105056/report.html"
+                }
+            ]
+        },
+        {
+            "slug": "Story LV",
+            "label": "LV - Story",
+            "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+            "runs": [
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_134912",
+                    "performanceScore": 55,
+                    "lcp": {
+                        "value": 3068.638,
+                        "score": 0.76,
+                        "displayValue": "3.1 s",
+                        "phases": null
+                    },
+                    "fcp": {
+                        "value": 2151.28,
+                        "score": 0.79,
+                        "displayValue": "2.2 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2658.999999999998,
+                        "score": 0.04,
+                        "displayValue": "2,660 ms"
+                    },
+                    "tti": {
+                        "value": 20524.55472500001,
+                        "score": 0.02,
+                        "displayValue": "20.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 8782.532035424805,
+                        "score": 0.16,
+                        "displayValue": "8.8 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/Story LV/2026-04-30_134912/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_135353",
+                    "performanceScore": 54,
+                    "lcp": {
+                        "value": 3070.0254999999997,
+                        "score": 0.76,
+                        "displayValue": "3.1 s",
+                        "phases": null
+                    },
+                    "fcp": {
+                        "value": 2157.4615,
+                        "score": 0.79,
+                        "displayValue": "2.2 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2551,
+                        "score": 0.04,
+                        "displayValue": "2,550 ms"
+                    },
+                    "tti": {
+                        "value": 22194.63145,
+                        "score": 0.01,
+                        "displayValue": "22.2 s"
+                    },
+                    "speedIndex": {
+                        "value": 9693.775589360564,
+                        "score": 0.11,
+                        "displayValue": "9.7 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/Story LV/2026-04-30_135353/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_171216",
+                    "performanceScore": 57,
+                    "lcp": {
+                        "value": 2430.3725,
+                        "score": 0.91,
+                        "displayValue": "2.4 s"
+                    },
+                    "fcp": {
+                        "value": 2126.7605,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 3343.999999999998,
+                        "score": 0.02,
+                        "displayValue": "3,340 ms"
+                    },
+                    "tti": {
+                        "value": 23484.65587105102,
+                        "score": 0.01,
+                        "displayValue": "23.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 9924.744771133626,
+                        "score": 0.1,
+                        "displayValue": "9.9 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-04-30_171216/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-04-30",
+                    "timestamp": "2026-04-30_171227",
+                    "performanceScore": 44,
+                    "lcp": {
+                        "value": 4665.9265,
+                        "score": 0.33,
+                        "displayValue": "4.7 s"
+                    },
+                    "fcp": {
+                        "value": 2140.9415,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2659.580000000009,
+                        "score": 0.04,
+                        "displayValue": "2,660 ms"
+                    },
+                    "tti": {
+                        "value": 21811.908325000004,
+                        "score": 0.01,
+                        "displayValue": "21.8 s"
+                    },
+                    "speedIndex": {
+                        "value": 9054.356935771439,
+                        "score": 0.14,
+                        "displayValue": "9.1 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-04-30_171227/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-06",
+                    "timestamp": "2026-05-06_094806",
+                    "performanceScore": 47,
+                    "lcp": {
+                        "value": 3888.8945000000003,
+                        "score": 0.53,
+                        "displayValue": "3.9 s"
+                    },
+                    "fcp": {
+                        "value": 2127.0054999999998,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.007791,
+                        "score": 1,
+                        "displayValue": "0.008"
+                    },
+                    "tbt": {
+                        "value": 3149.499999999982,
+                        "score": 0.02,
+                        "displayValue": "3,150 ms"
+                    },
+                    "tti": {
+                        "value": 36961.739629,
+                        "score": 0,
+                        "displayValue": "37.0 s"
+                    },
+                    "speedIndex": {
+                        "value": 15819.851578644637,
+                        "score": 0,
+                        "displayValue": "15.8 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-06_094806/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-07",
+                    "timestamp": "2026-05-07_090723",
+                    "performanceScore": 34,
+                    "lcp": {
+                        "value": 32785.920000000006,
+                        "score": 0,
+                        "displayValue": "32.8 s"
+                    },
+                    "fcp": {
+                        "value": 2123.683,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2603.875,
+                        "score": 0.04,
+                        "displayValue": "2,600 ms"
+                    },
+                    "tti": {
+                        "value": 34075.77540000001,
+                        "score": 0,
+                        "displayValue": "34.1 s"
+                    },
+                    "speedIndex": {
+                        "value": 13892.423542202532,
+                        "score": 0.01,
+                        "displayValue": "13.9 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-07_090723/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-07",
+                    "timestamp": "2026-05-07_152151",
+                    "performanceScore": 33,
+                    "lcp": {
+                        "value": 8949.576500000001,
+                        "score": 0.01,
+                        "displayValue": "8.9 s"
+                    },
+                    "fcp": {
+                        "value": 2135.0845,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 4798.882999999983,
+                        "score": 0,
+                        "displayValue": "4,800 ms"
+                    },
+                    "tti": {
+                        "value": 59596.224062051006,
+                        "score": 0,
+                        "displayValue": "59.6 s"
+                    },
+                    "speedIndex": {
+                        "value": 16877.923365097424,
+                        "score": 0,
+                        "displayValue": "16.9 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-07_152151/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-07",
+                    "timestamp": "2026-05-07_212003",
+                    "performanceScore": 61,
+                    "lcp": {
+                        "value": 2589.3900000000003,
+                        "score": 0.88,
+                        "displayValue": "2.6 s"
+                    },
+                    "fcp": {
+                        "value": 2131.962,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2540.999999999998,
+                        "score": 0.04,
+                        "displayValue": "2,540 ms"
+                    },
+                    "tti": {
+                        "value": 22392.64709999999,
+                        "score": 0.01,
+                        "displayValue": "22.4 s"
+                    },
+                    "speedIndex": {
+                        "value": 5954.170676027836,
+                        "score": 0.47,
+                        "displayValue": "6.0 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-07_212003/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_032903",
+                    "performanceScore": 57,
+                    "lcp": {
+                        "value": 2662.289,
+                        "score": 0.86,
+                        "displayValue": "2.7 s"
+                    },
+                    "fcp": {
+                        "value": 1823.569,
+                        "score": 0.89,
+                        "displayValue": "1.8 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2482.9150000000022,
+                        "score": 0.04,
+                        "displayValue": "2,480 ms"
+                    },
+                    "tti": {
+                        "value": 24900.847849041747,
+                        "score": 0,
+                        "displayValue": "24.9 s"
+                    },
+                    "speedIndex": {
+                        "value": 11763.054484667804,
+                        "score": 0.04,
+                        "displayValue": "11.8 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-08_032903/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_091135",
+                    "performanceScore": 53,
+                    "lcp": {
+                        "value": 2950.0869999999995,
+                        "score": 0.79,
+                        "displayValue": "3.0 s"
+                    },
+                    "fcp": {
+                        "value": 2173.444,
+                        "score": 0.79,
+                        "displayValue": "2.2 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 5239.39839999998,
+                        "score": 0,
+                        "displayValue": "5,240 ms"
+                    },
+                    "tti": {
+                        "value": 73759.83329255112,
+                        "score": 0,
+                        "displayValue": "73.8 s"
+                    },
+                    "speedIndex": {
+                        "value": 15990.65931232397,
+                        "score": 0,
+                        "displayValue": "16.0 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-08_091135/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_150212",
+                    "performanceScore": 57,
+                    "lcp": {
+                        "value": 2622.4180000000006,
+                        "score": 0.87,
+                        "displayValue": "2.6 s"
+                    },
+                    "fcp": {
+                        "value": 2155.777,
+                        "score": 0.79,
+                        "displayValue": "2.2 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2475.4999999999964,
+                        "score": 0.04,
+                        "displayValue": "2,480 ms"
+                    },
+                    "tti": {
+                        "value": 21965.630871051035,
+                        "score": 0.01,
+                        "displayValue": "22.0 s"
+                    },
+                    "speedIndex": {
+                        "value": 10448.290690252139,
+                        "score": 0.08,
+                        "displayValue": "10.4 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-08_150212/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-08",
+                    "timestamp": "2026-05-08_205957",
+                    "performanceScore": 54,
+                    "lcp": {
+                        "value": 2785.053,
+                        "score": 0.83,
+                        "displayValue": "2.8 s"
+                    },
+                    "fcp": {
+                        "value": 2179.001,
+                        "score": 0.78,
+                        "displayValue": "2.2 s"
+                    },
+                    "cls": {
+                        "value": 0.006471,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 32827.49999999997,
+                        "score": 0,
+                        "displayValue": "32,830 ms"
+                    },
+                    "tti": {
+                        "value": 84847.37862534073,
+                        "score": 0,
+                        "displayValue": "84.8 s"
+                    },
+                    "speedIndex": {
+                        "value": 21420.136078324933,
+                        "score": 0,
+                        "displayValue": "21.4 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-08_205957/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_032551",
+                    "performanceScore": 35,
+                    "lcp": {
+                        "value": 24929.44324394226,
+                        "score": 0,
+                        "displayValue": "24.9 s"
+                    },
+                    "fcp": {
+                        "value": 2158.57,
+                        "score": 0.79,
+                        "displayValue": "2.2 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2237.499087982169,
+                        "score": 0.06,
+                        "displayValue": "2,240 ms"
+                    },
+                    "tti": {
+                        "value": 29496.698787155154,
+                        "score": 0,
+                        "displayValue": "29.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 13518.968621019472,
+                        "score": 0.02,
+                        "displayValue": "13.5 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-09_032551/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_092807",
+                    "performanceScore": 33,
+                    "lcp": {
+                        "value": 29090.460899999984,
+                        "score": 0,
+                        "displayValue": "29.1 s"
+                    },
+                    "fcp": {
+                        "value": 2135.25,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 21355.49999999997,
+                        "score": 0,
+                        "displayValue": "21,360 ms"
+                    },
+                    "tti": {
+                        "value": 60279.60311999996,
+                        "score": 0,
+                        "displayValue": "60.3 s"
+                    },
+                    "speedIndex": {
+                        "value": 17973.163222185143,
+                        "score": 0,
+                        "displayValue": "18.0 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-09_092807/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_144356",
+                    "performanceScore": 53,
+                    "lcp": {
+                        "value": 2973.3577999999998,
+                        "score": 0.79,
+                        "displayValue": "3.0 s"
+                    },
+                    "fcp": {
+                        "value": 2287.2309999999998,
+                        "score": 0.75,
+                        "displayValue": "2.3 s"
+                    },
+                    "cls": {
+                        "value": 0.010673,
+                        "score": 1,
+                        "displayValue": "0.011"
+                    },
+                    "tbt": {
+                        "value": 2520.4658000000004,
+                        "score": 0.04,
+                        "displayValue": "2,520 ms"
+                    },
+                    "tti": {
+                        "value": 51067.21819999998,
+                        "score": 0,
+                        "displayValue": "51.1 s"
+                    },
+                    "speedIndex": {
+                        "value": 15403.072255122486,
+                        "score": 0,
+                        "displayValue": "15.4 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-09_144356/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-09",
+                    "timestamp": "2026-05-09_203937",
+                    "performanceScore": 54,
+                    "lcp": {
+                        "value": 2742.3268,
+                        "score": 0.84,
+                        "displayValue": "2.7 s"
+                    },
+                    "fcp": {
+                        "value": 2135.008,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.006471,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 30674.18879999997,
+                        "score": 0,
+                        "displayValue": "30,670 ms"
+                    },
+                    "tti": {
+                        "value": 74885.44104099998,
+                        "score": 0,
+                        "displayValue": "74.9 s"
+                    },
+                    "speedIndex": {
+                        "value": 17841.69944265356,
+                        "score": 0,
+                        "displayValue": "17.8 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-09_203937/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-10",
+                    "timestamp": "2026-05-10_032721",
+                    "performanceScore": 54,
+                    "lcp": {
+                        "value": 3034.608,
+                        "score": 0.77,
+                        "displayValue": "3.0 s"
+                    },
+                    "fcp": {
+                        "value": 2126.352,
+                        "score": 0.8,
+                        "displayValue": "2.1 s"
+                    },
+                    "cls": {
+                        "value": 0.005729,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 2320.000000000002,
+                        "score": 0.05,
+                        "displayValue": "2,320 ms"
+                    },
+                    "tti": {
+                        "value": 28712.00054605103,
+                        "score": 0,
+                        "displayValue": "28.7 s"
+                    },
+                    "speedIndex": {
+                        "value": 19759.439707778685,
+                        "score": 0,
+                        "displayValue": "19.8 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-10_032721/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-10",
+                    "timestamp": "2026-05-10_095019",
+                    "performanceScore": 51,
+                    "lcp": {
+                        "value": 3125.6405000000004,
+                        "score": 0.74,
+                        "displayValue": "3.1 s"
+                    },
+                    "fcp": {
+                        "value": 2288.2205,
+                        "score": 0.75,
+                        "displayValue": "2.3 s"
+                    },
+                    "cls": {
+                        "value": 0.006471,
+                        "score": 1,
+                        "displayValue": "0.006"
+                    },
+                    "tbt": {
+                        "value": 8266.500000000004,
+                        "score": 0,
+                        "displayValue": "8,270 ms"
+                    },
+                    "tti": {
+                        "value": 89643.94810902288,
+                        "score": 0,
+                        "displayValue": "89.6 s"
+                    },
+                    "speedIndex": {
+                        "value": 16989.664042874803,
+                        "score": 0,
+                        "displayValue": "17.0 s"
+                    },
+                    "inp": null,
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-10_095019/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-10",
+                    "timestamp": "2026-05-10_144431",
+                    "performanceScore": 62,
+                    "lcp": {
+                        "value": 2338.4112000000005,
+                        "score": 0.92,
+                        "displayValue": "2.3 s"
+                    },
+                    "fcp": {
+                        "value": 1062.7521957885745,
+                        "score": 1,
+                        "displayValue": "1.1 s"
+                    },
+                    "cls": {
+                        "value": 0.009713,
+                        "score": 1,
+                        "displayValue": "0.01"
+                    },
+                    "tbt": {
+                        "value": 8299.659004211417,
+                        "score": 0,
+                        "displayValue": "8,300 ms"
+                    },
+                    "tti": {
+                        "value": 22520.72152520991,
+                        "score": 0.01,
+                        "displayValue": "22.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 6196.94042856148,
+                        "score": 0.43,
+                        "displayValue": "6.2 s"
+                    },
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-10_144431/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-11",
+                    "timestamp": "2026-05-11_034543",
+                    "performanceScore": 66,
+                    "lcp": {
+                        "value": 774.0778112670898,
+                        "score": 1,
+                        "displayValue": "0.8 s"
+                    },
+                    "fcp": {
+                        "value": 142.35311126708984,
+                        "score": 1,
+                        "displayValue": "0.1 s"
+                    },
+                    "cls": {
+                        "value": 0.003617,
+                        "score": 1,
+                        "displayValue": "0.004"
+                    },
+                    "tbt": {
+                        "value": 2986.5000000000127,
+                        "score": 0.03,
+                        "displayValue": "2,990 ms"
+                    },
+                    "tti": {
+                        "value": 37472.809174041766,
+                        "score": 0,
+                        "displayValue": "37.5 s"
+                    },
+                    "speedIndex": {
+                        "value": 5130.379646515244,
+                        "score": 0.61,
+                        "displayValue": "5.1 s"
+                    },
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-11_034543/report.html"
+                },
+                {
+                    "slug": "Story LV",
+                    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+                    "label": "LV - Story",
+                    "runDate": "2026-05-11",
+                    "timestamp": "2026-05-11_105056",
+                    "performanceScore": 60,
+                    "lcp": {
+                        "value": 1679.3058,
+                        "score": 0.99,
+                        "displayValue": "1.7 s"
+                    },
+                    "fcp": {
+                        "value": 1073.5924,
+                        "score": 0.99,
+                        "displayValue": "1.1 s"
+                    },
+                    "cls": {
+                        "value": 0.009392,
+                        "score": 1,
+                        "displayValue": "0.009"
+                    },
+                    "tbt": {
+                        "value": 29626.8745632172,
+                        "score": 0,
+                        "displayValue": "29,630 ms"
+                    },
+                    "tti": {
+                        "value": 51967.034634402764,
+                        "score": 0,
+                        "displayValue": "52.0 s"
+                    },
+                    "speedIndex": {
+                        "value": 12147.766925899215,
+                        "score": 0.03,
+                        "displayValue": "12.1 s"
+                    },
+                    "lcpElement": null,
+                    "reportUrl": "https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev/reports-url/Story%20LV/2026-05-11_105056/report.html"
+                }
+            ]
+        }
+    ]
+}
