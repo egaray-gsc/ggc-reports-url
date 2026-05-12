@@ -191,8 +191,9 @@ export function MetricChart({ data, activeMetric }: Props) {
             const [, m, d] = datePart.split('-');
             const sameDayCount = allTimestamps.filter((t) => t.startsWith(datePart)).length;
             if (sameDayCount > 1) {
-              const timePart = v.slice(11, 16);
-              return `${d}/${m} ${timePart}`;
+              const hh = v.slice(11, 13);
+              const mm = v.slice(13, 15);
+              return `${d}/${m} ${hh}:${mm}`;
             }
             return `${d}/${m}`;
           }}

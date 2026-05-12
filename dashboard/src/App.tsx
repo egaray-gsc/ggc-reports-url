@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import type { DashboardData, MetricKey } from './types';
-import { MetricToggle } from './components/MetricToggle';
-import { MetricChart } from './components/MetricChart';
-import './App.css';
+import { useEffect, useState } from "react";
+import type { DashboardData, MetricKey } from "./types";
+import { MetricToggle } from "./components/MetricToggle";
+import { MetricChart } from "./components/MetricChart";
+import "./App.css";
 
-const R2_BASE_URL = import.meta.env.VITE_R2_BASE_URL ?? '';
+const R2_BASE_URL = import.meta.env.VITE_R2_BASE_URL ?? "";
 
-type Site = 'lv' | 'md';
+type Site = "lv" | "md";
 
 const SITES: { id: Site; label: string; file: string }[] = [
-  { id: 'lv', label: 'La Vanguardia', file: 'dashboard-data-lv.json' },
-  { id: 'md', label: 'Mundo Deportivo', file: 'dashboard-data-md.json' },
+  { id: "lv", label: "La Vanguardia", file: "dashboard-data-lv.json" },
+  { id: "md", label: "Mundo Deportivo", file: "dashboard-data-md.json" },
 ];
 
 export default function App() {
-  const [site, setSite] = useState<Site>('lv');
+  const [site, setSite] = useState<Site>("lv");
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeMetric, setActiveMetric] = useState<MetricKey>('lcp');
+  const [activeMetric, setActiveMetric] = useState<MetricKey>("lcp");
 
   useEffect(() => {
     const current = SITES.find((s) => s.id === site)!;
@@ -37,9 +37,9 @@ export default function App() {
   }, [site]);
 
   const updatedAt = data
-    ? new Date(data.generatedAt).toLocaleString('es-ES', {
-        dateStyle: 'medium',
-        timeStyle: 'short',
+    ? new Date(data.generatedAt).toLocaleString("es-ES", {
+        dateStyle: "medium",
+        timeStyle: "short",
       })
     : null;
 
@@ -52,28 +52,65 @@ export default function App() {
             {SITES.map((s) => (
               <button
                 key={s.id}
-                className={`site-btn${site === s.id ? ' active' : ''}`}
+                className={`site-btn${site === s.id ? " active" : ""}`}
                 onClick={() => setSite(s.id)}
               >
                 {s.label}
               </button>
             ))}
           </nav>
-          {updatedAt && <span className="updated">Actualizado: {updatedAt}</span>}
+          {updatedAt && (
+            <span className="updated">Actualizado: {updatedAt}</span>
+          )}
         </div>
       </header>
 
       <main className="main">
         {loading && <p className="state-msg">Cargando datos...</p>}
-        {error && <p className="state-msg error">Error al cargar datos: {error}</p>}
+        {error && (
+          <p className="state-msg error">Error al cargar datos: {error}</p>
+        )}
 
         {data && (
           <>
-            <MetricToggle activeMetric={activeMetric} onSelect={setActiveMetric} />
+            <MetricToggle
+              activeMetric={activeMetric}
+              onSelect={setActiveMetric}
+            />
 
             <section className="chart-section">
               <MetricChart data={data} activeMetric={activeMetric} />
             </section>
+
+            <details className="url-details">
+              <summary className="url-summary">
+                URLs monitorizadas ({data.urls.length})
+              </summary>
+              <table className="url-table">
+                <thead>
+                  <tr>
+                    <th>Label</th>
+                    <th>URL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.urls.map((u) => (
+                    <tr key={u.slug}>
+                      <td>{u.label}</td>
+                      <td>
+                        <a
+                          href={u.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {u.url}
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </details>
           </>
         )}
       </main>
