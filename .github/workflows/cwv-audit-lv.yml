@@ -27,7 +27,7 @@ jobs:
         run: |
           node --input-type=module <<'EOF' >> "$GITHUB_OUTPUT"
           import { readFileSync } from 'fs';
-          const urls = JSON.parse(readFileSync('./configs/urls.json', 'utf-8'));
+          const urls = JSON.parse(readFileSync('./configs/urls-lv.json', 'utf-8'));
           process.stdout.write('matrix=' + JSON.stringify({ slug: urls.map(u => u.slug) }) + '\n');
           EOF
 
@@ -60,7 +60,8 @@ jobs:
         run: |
           node scripts/run-audit.js \
             --slug "${{ matrix.slug }}" \
-            --timestamp "${{ needs.prepare.outputs.timestamp }}"
+            --timestamp "${{ needs.prepare.outputs.timestamp }}" \
+            --urls configs/urls-lv.json
 
   aggregate:
     needs: audit

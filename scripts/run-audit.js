@@ -39,19 +39,20 @@ const getArg = (name) => {
 
 const slug = getArg('slug');
 const timestamp = getArg('timestamp');
+const urlsArg = getArg('urls') ?? 'configs/urls.json';
 
 if (!slug || !timestamp) {
-  console.error('Uso: node scripts/run-audit.js --slug <slug> --timestamp <YYYY-MM-DD_HHmmss>');
+  console.error('Uso: node scripts/run-audit.js --slug <slug> --timestamp <YYYY-MM-DD_HHmmss> [--urls configs/urls.json]');
   process.exit(1);
 }
 
 // ---------- cargar config de URL ----------
-const urlsPath = path.join(__dirname, '..', 'configs', 'urls.json');
+const urlsPath = path.join(__dirname, '..', urlsArg);
 const urls = JSON.parse(fs.readFileSync(urlsPath, 'utf-8'));
 const entry = urls.find((u) => u.slug === slug);
 
 if (!entry) {
-  console.error(`No se encontró la URL con slug "${slug}" en configs/urls.json`);
+  console.error(`No se encontró la URL con slug "${slug}" en ${urlsArg}`);
   process.exit(1);
 }
 

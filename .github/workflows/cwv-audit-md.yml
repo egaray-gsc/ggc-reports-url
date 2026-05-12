@@ -60,7 +60,8 @@ jobs:
         run: |
           node scripts/run-audit.js \
             --slug "${{ matrix.slug }}" \
-            --timestamp "${{ needs.prepare.outputs.timestamp }}"
+            --timestamp "${{ needs.prepare.outputs.timestamp }}" \
+            --urls configs/urls-md.json
 
   aggregate:
     needs: audit
