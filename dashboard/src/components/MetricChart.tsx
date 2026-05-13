@@ -141,12 +141,15 @@ export function MetricChart({ data, activeMetric }: Props) {
     return entry;
   });
 
-  // Resolver cada hito al timestamp más cercano disponible en los datos
+  // Resolver cada hito al timestamp más cercano, descartando los que quedan fuera del rango de datos
   const milestones = (milestonesConfig as MilestoneConfig[]).flatMap((m) => {
     if (allTimestamps.length === 0) return [];
+    const mTime = new Date(m.date).getTime();
+    const firstTime = new Date(allTimestamps[0]).getTime();
+    const lastTime = new Date(allTimestamps[allTimestamps.length - 1]).getTime();
+    if (mTime < firstTime || mTime > lastTime) return [];
     const exact = allTimestamps.find((ts) => ts.startsWith(m.date));
     if (exact) return [{ ...m, ts: exact }];
-    const mTime = new Date(m.date).getTime();
     const nearest = allTimestamps.reduce((prev, curr) =>
       Math.abs(new Date(curr).getTime() - mTime) < Math.abs(new Date(prev).getTime() - mTime)
         ? curr
