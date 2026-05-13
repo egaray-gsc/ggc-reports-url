@@ -12,6 +12,7 @@ import {
 } from 'recharts';
 import { METRICS, URL_COLORS } from '../types';
 import type { DashboardData, MetricKey, RunMetrics } from '../types';
+import type { DateRange } from '../App';
 import milestonesConfig from '../milestones.json';
 
 interface MilestoneConfig {
@@ -23,6 +24,7 @@ interface MilestoneConfig {
 interface Props {
   data: DashboardData;
   activeMetric: MetricKey;
+  dateRange: DateRange;
 }
 
 function getMetricValue(run: RunMetrics, key: MetricKey): number | null {
@@ -102,7 +104,7 @@ const CustomTooltip = ({
   );
 };
 
-export function MetricChart({ data, activeMetric }: Props) {
+export function MetricChart({ data, activeMetric, dateRange }: Props) {
   const meta = METRICS.find((m) => m.key === activeMetric)!;
   const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
 
@@ -124,10 +126,17 @@ export function MetricChart({ data, activeMetric }: Props) {
 
   const [t1, t2] = meta.thresholds;
 
+  const cutoffDate = dateRange === 'all' ? null : (() => {
+    const days = dateRange === '7d' ? 7 : dateRange === '30d' ? 30 : 90;
+    const d = new Date();
+    d.setDate(d.getDate() - days);
+    return d.toISOString().slice(0, 10);
+  })();
+
   // Construir dataset: una entrada por timestamp único (permite múltiples auditorías el mismo día)
   const allTimestamps = Array.from(
     new Set(data.urls.flatMap((u) => u.runs.map((r) => r.timestamp))),
-  ).sort();
+  ).sort().filter((ts) => cutoffDate === null || ts.slice(0, 10) >= cutoffDate);
 
   const chartData = allTimestamps.map((ts) => {
     const entry: Record<string, unknown> = { date: ts };
@@ -158,9 +167,13 @@ export function MetricChart({ data, activeMetric }: Props) {
     return [{ ...m, ts: nearest }];
   });
 
-  // Rango del eje Y con margen
+  // Rango del eje Y con margen (solo valores visibles tras el filtro de fechas)
+  const visibleTimestampSet = new Set(allTimestamps);
   const allValues = data.urls.flatMap((u) =>
-    u.runs.map((r) => getMetricValue(r, activeMetric)).filter((v): v is number => v != null),
+    u.runs
+      .filter((r) => visibleTimestampSet.has(r.timestamp))
+      .map((r) => getMetricValue(r, activeMetric))
+      .filter((v): v is number => v != null),
   );
   const minVal = allValues.length ? Math.min(...allValues) : 0;
   const maxVal = allValues.length ? Math.max(...allValues) : t2 * 1.5;

@@ -7,6 +7,14 @@ import "./App.css";
 const R2_BASE_URL = import.meta.env.VITE_R2_BASE_URL ?? "";
 
 type Site = "lv" | "md";
+export type DateRange = "7d" | "30d" | "90d" | "all";
+
+const DATE_RANGES: { id: DateRange; label: string }[] = [
+  { id: "7d",  label: "7 días" },
+  { id: "30d", label: "30 días" },
+  { id: "90d", label: "90 días" },
+  { id: "all", label: "Todo" },
+];
 
 const SITES: { id: Site; label: string; file: string }[] = [
   { id: "lv", label: "La Vanguardia", file: "dashboard-data-lv.json" },
@@ -19,6 +27,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeMetric, setActiveMetric] = useState<MetricKey>("lcp");
+  const [dateRange, setDateRange] = useState<DateRange>("30d");
 
   useEffect(() => {
     const current = SITES.find((s) => s.id === site)!;
@@ -79,7 +88,20 @@ export default function App() {
             />
 
             <section className="chart-section">
-              <MetricChart data={data} activeMetric={activeMetric} />
+              <div className="chart-section-header">
+                <nav className="range-nav">
+                  {DATE_RANGES.map((r) => (
+                    <button
+                      key={r.id}
+                      className={`range-btn${dateRange === r.id ? " active" : ""}`}
+                      onClick={() => setDateRange(r.id)}
+                    >
+                      {r.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+              <MetricChart data={data} activeMetric={activeMetric} dateRange={dateRange} />
             </section>
 
             <details className="url-details">
