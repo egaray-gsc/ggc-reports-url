@@ -17,6 +17,8 @@ configs/urls-{site}.json
 
 Les auditories s'executen amb configuració mòbil (375×812, limitació de xarxa simulada, només categoria de rendiment). La injecció de cookies persisteix entre navegacions, de manera que els banners de consentiment es gestionen abans que s'activi Lighthouse.
 
+Per cada slug, Lighthouse s'executa **3 vegades** i es guarda la **mediana** de cada mètrica (Performance Score, LCP, CLS, FCP, TBT, TTI, Speed Index). L'informe HTML que es puja a R2 correspon al run amb el valor de LCP medià. La mediana és preferible a la mitjana perquè és més robusta davant pics puntuals.
+
 ## Estructura d'emmagatzematge a R2
 
 ```
@@ -105,7 +107,7 @@ Els workflows d'auditoria generen un timestamp en zona horària de Madrid, const
 
 | Script                         | Propòsit                                                                                            |
 | ------------------------------ | --------------------------------------------------------------------------------------------------- |
-| `scripts/run-audit.js`         | Orquestrador — Puppeteer + Lighthouse + pujada                                                      |
+| `scripts/run-audit.js`         | Orquestrador — executa Lighthouse 3 vegades, calcula la mediana de les mètriques i puja el resultat |
 | `scripts/accept-cookies.js`    | Detecta i fa clic als botons de consentiment; desa les cookies a `/tmp/consent-cookies-{slug}.json` |
 | `scripts/extract-cwv.js`       | Analitza LHR JSON → mètriques estructurades (LCP, CLS, FCP, TBT, TTFB, subfases de LCP)             |
 | `scripts/upload-r2.js`         | Pujada R2 compatible amb S3 (`uploadReport`, `uploadDashboardData`)                                 |
