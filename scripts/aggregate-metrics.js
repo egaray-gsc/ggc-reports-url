@@ -32,7 +32,7 @@ const urlsFile = args[args.indexOf('--urls') + 1] ?? 'configs/urls.json';
 const outputFile = args[args.indexOf('--output') + 1] ?? 'dashboard-data.json';
 
 const urlsConfig = JSON.parse(readFileSync(urlsFile, 'utf-8'));
-const allowedSlugs = new Set(urlsConfig.map((u) => u.slug));
+const allowedSlugDomains = new Map(urlsConfig.map((u) => [u.slug, u.cookieDomain]));
 
 async function listAllMetricsKeys() {
   const keys = [];
@@ -81,7 +81,11 @@ async function main() {
       const metrics = await readJson(key);
       const { slug, label, url } = metrics;
 
-      if (!allowedSlugs.has(slug)) continue;
+      if (!allowedSlugDomains.has(slug)) continue;
+
+      const expectedDomain = allowedSlugDomains.get(slug);
+      const hostname = new URL(url).hostname;
+      if (!hostname.endsWith(expectedDomain)) continue;
 
       if (!bySlug.has(slug)) {
         bySlug.set(slug, { slug, label, url, runs: [] });
