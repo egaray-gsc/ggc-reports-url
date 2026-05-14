@@ -6,9 +6,27 @@
     "cookieDomain": "lavanguardia.com"
   },
   {
+    "slug": "Section LV",
+    "url": "https://www.lavanguardia.com/internacional",
+    "label": "Section",
+    "cookieDomain": "lavanguardia.com"
+  },
+  {
     "slug": "Story LV",
-    "url": "https://www.lavanguardia.com/economia/20260430/11525944/vivienda-ofrece-junts-pnv-rebajas-irpf-caseros-congelen-alquiler.html",
+    "url": "https://www.lavanguardia.com/relatos/20260425/11522565/manel-ruiz-maestro-relojero-gran-error-mucha-gente-comprarse-reloj-lujo-pensando-dara-hora-perfecta-no-es-importante-gvm.html",
     "label": "Story",
+    "cookieDomain": "lavanguardia.com"
+  },
+  {
+    "slug": "Video Story LV",
+    "url": "https://www.lavanguardia.com/vida/20260512/11537631/fotoperiodista-busca-punto-optimo-informacion-plasticidad.html",
+    "label": "Video Story",
+    "cookieDomain": "lavanguardia.com"
+  },
+  {
+    "slug": "Moveo Story LV",
+    "url": "https://www.lavanguardia.com/motor/actualidad/20260512/11532388/enric-roche-medico-vascular-tomar-aspirina-viajar-prevenir-problemas-circulacion-ninguna-base-cientifica.html",
+    "label": "Moveo Story",
     "cookieDomain": "lavanguardia.com"
   }
 ]
