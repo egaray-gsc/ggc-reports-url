@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { DashboardData, MetricKey } from "./types";
 import { MetricToggle } from "./components/MetricToggle";
 import { MetricChart } from "./components/MetricChart";
+import urlsLv from "../../configs/urls-lv.json";
+import urlsMd from "../../configs/urls-md.json";
 import "./App.css";
 
 const R2_BASE_URL = import.meta.env.VITE_R2_BASE_URL ?? "";
@@ -20,6 +22,11 @@ const SITES: { id: Site; label: string; file: string }[] = [
   { id: "lv", label: "La Vanguardia", file: "dashboard-data-lv.json" },
   { id: "md", label: "Mundo Deportivo", file: "dashboard-data-md.json" },
 ];
+
+const CONFIG_URLS: Record<Site, { slug: string; label: string; url: string }[]> = {
+  lv: urlsLv,
+  md: urlsMd,
+};
 
 export default function App() {
   const [site, setSite] = useState<Site>("lv");
@@ -106,7 +113,7 @@ export default function App() {
 
             <details className="url-details">
               <summary className="url-summary">
-                URLs monitorizadas ({data.urls.length})
+                URLs monitorizadas ({CONFIG_URLS[site].length})
               </summary>
               <table className="url-table">
                 <thead>
@@ -116,7 +123,7 @@ export default function App() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.urls.map((u) => (
+                  {CONFIG_URLS[site].map((u) => (
                     <tr key={u.slug}>
                       <td>{u.label}</td>
                       <td>
