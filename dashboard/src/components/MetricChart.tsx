@@ -226,14 +226,20 @@ export function MetricChart({ data, activeMetric, dateRange }: Props) {
     return [{ ...m, ts: nearest }];
   });
 
-  // Rango del eje Y con margen (solo valores visibles tras el filtro de fechas)
+  // Rango del eje Y con margen (solo valores visibles tras el filtro de fechas y slugs activos)
+  const visibleSlugs =
+    selectedSlugs.size > 0
+      ? selectedSlugs
+      : new Set(data.urls.map((u) => u.slug));
   const visibleTimestampSet = new Set(allTimestamps);
-  const allValues = data.urls.flatMap((u) =>
-    u.runs
-      .filter((r) => visibleTimestampSet.has(r.timestamp))
-      .map((r) => getMetricValue(r, activeMetric))
-      .filter((v): v is number => v != null),
-  );
+  const allValues = data.urls
+    .filter((u) => visibleSlugs.has(u.slug))
+    .flatMap((u) =>
+      u.runs
+        .filter((r) => visibleTimestampSet.has(r.timestamp))
+        .map((r) => getMetricValue(r, activeMetric))
+        .filter((v): v is number => v != null),
+    );
   const minVal = allValues.length ? Math.min(...allValues) : 0;
   const maxVal = allValues.length ? Math.max(...allValues) : t2 * 1.5;
   const yMin = Math.max(0, minVal * 0.85);
