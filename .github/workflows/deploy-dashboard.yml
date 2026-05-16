@@ -26,15 +26,17 @@ jobs:
         with:
           node-version: 22
 
+      - uses: pnpm/action-setup@v4
+
       - name: Install dashboard dependencies
         working-directory: dashboard
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build dashboard
         working-directory: dashboard
         env:
           VITE_R2_BASE_URL: ${{ secrets.R2_BASE_URL }}
-        run: npm run build
+        run: pnpm run build
 
       - uses: actions/upload-pages-artifact@v3
         with:

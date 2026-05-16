@@ -15,17 +15,32 @@ Companion repo `ggc-reports-ci` lives alongside this one in the VSCode workspace
 
 **Audit pipeline (root):**
 ```bash
-npm run audit          # Run Lighthouse audit — requires --slug and --timestamp args
-npm run aggregate      # Aggregate all R2 metrics into dashboard-data.json
-npm run test:cookies   # Test cookie acceptance logic
+pnpm run audit          # Run Lighthouse audit — requires --slug and --timestamp args
+pnpm run aggregate      # Aggregate all R2 metrics into dashboard-data.json
+pnpm run test:cookies   # Test cookie acceptance logic
 ```
 
 **Dashboard (`cd dashboard` first):**
 ```bash
-npm run dev      # Start Vite dev server
-npm run build    # tsc -b && vite build
-npm run lint     # ESLint
-npm run preview  # Preview production build locally
+pnpm run dev      # Start Vite dev server
+pnpm run build    # tsc -b && vite build
+pnpm run lint     # ESLint
+pnpm run preview  # Preview production build locally
+```
+
+## Getting Started
+
+This project uses **pnpm**. Install it once if you don't have it:
+
+```bash
+npm install -g pnpm
+```
+
+Then install dependencies:
+
+```bash
+pnpm install                      # audit pipeline (root)
+cd dashboard && pnpm install      # dashboard
 ```
 
 ## Environment Setup

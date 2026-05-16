@@ -41,17 +41,40 @@ reports-url/
 ### Requisits previs
 
 - Node.js 22
-- Chrome (instal·lat localment o via `browser-actions/setup-chrome` al CI)
+- pnpm (`npm install -g pnpm`)
 
 ### Instal·lació
 
 ```bash
-npm install
+pnpm install             # arrel (pipeline d'auditoria)
+cd dashboard
+pnpm install             # tauler
 ```
 
-### Variables d'entorn
+## Ús
 
-Copia `.env.example` a `.env` i omple les credencials de Cloudflare R2:
+### Tauler en local
+
+La manera habitual d'usar el projecte en local és aixecar únicament el tauler, que llegeix les mètriques ja agregades a R2.
+
+Crea un fitxer `dashboard/.env` amb:
+
+```
+VITE_R2_BASE_URL=https://pub-2b50285893574bb786ba66cc8a9b03a8.r2.dev
+```
+
+I arrenca el servidor de desenvolupament:
+
+```bash
+cd dashboard
+pnpm run dev      # http://localhost:5173
+```
+
+### Auditories i agregació de mètriques
+
+Les auditories (`run-audit.js`) i l'agregador (`aggregate-metrics.js`) estan dissenyats per executar-se via **GitHub Actions**, on els secrets de Cloudflare R2 estan configurats com a secrets del repositori.
+
+Per executar-los en local caldria disposar d'aquestes credencials i crear un fitxer `.env` a l'arrel del projecte:
 
 ```
 R2_ACCESS_KEY_ID=
@@ -60,38 +83,6 @@ R2_BUCKET=
 R2_ENDPOINT=https://<accountId>.r2.cloudflarestorage.com
 R2_BASE_URL=https://<public-url>
 ```
-
-## Ús
-
-### Executar una auditoria en local
-
-```bash
-node scripts/run-audit.js --slug Home --timestamp 2026-05-12_120000 --urls configs/urls-lv.json
-```
-
-### Agregar mètriques
-
-```bash
-node scripts/aggregate-metrics.js --urls configs/urls-lv.json --output dashboard-data-lv.json
-```
-
-### Provar la lògica de cookies
-
-```bash
-node scripts/accept-cookies.js
-```
-
-## Tauler
-
-```bash
-cd dashboard
-npm install
-npm run dev      # servidor de desenvolupament a http://localhost:5173
-npm run build    # build de producció → dist/
-npm run lint
-```
-
-El tauler requereix `VITE_R2_BASE_URL` en temps de build (definit com a variable d'entorn o secret de GitHub Actions).
 
 ## CI/CD
 
