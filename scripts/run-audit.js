@@ -184,17 +184,29 @@ async function main() {
     const lhrs = [];
     for (let i = 0; i < NUM_RUNS; i++) {
       console.log(`\n🔦 Lighthouse — iteración ${i + 1}/${NUM_RUNS}...`);
-      const flow = await startFlow(page, { config: LIGHTHOUSE_CONFIG });
-      await flow.navigate(url, { stepName: slug });
-      const flowResult = await flow.createFlowResult();
-      const lhr = flowResult.steps[0].lhr;
-      lhrs.push(lhr);
+      try {
+        const flow = await startFlow(page, { config: LIGHTHOUSE_CONFIG });
+        await flow.navigate(url, { stepName: slug });
+        const flowResult = await flow.createFlowResult();
+        const lhr = flowResult.steps[0].lhr;
+        lhrs.push(lhr);
 
-      const perf = lhr.categories?.performance?.score != null
-        ? Math.round(lhr.categories.performance.score * 100)
-        : 'N/A';
-      const lcpVal = lhr.audits?.['largest-contentful-paint']?.displayValue ?? 'N/A';
-      console.log(`   → Perf: ${perf}  LCP: ${lcpVal}`);
+        const perf = lhr.categories?.performance?.score != null
+          ? Math.round(lhr.categories.performance.score * 100)
+          : 'N/A';
+        const lcpVal = lhr.audits?.['largest-contentful-paint']?.displayValue ?? 'N/A';
+        console.log(`   → Perf: ${perf}  LCP: ${lcpVal}`);
+      } catch (err) {
+        console.warn(`⚠️  Iteración ${i + 1} fallida (${err.code ?? err.message}) — se omite`);
+      }
+    }
+
+    if (lhrs.length === 0) {
+      throw new Error(`Todas las iteraciones de Lighthouse fallaron para "${slug}"`);
+    }
+
+    if (lhrs.length < NUM_RUNS) {
+      console.warn(`⚠️  Solo ${lhrs.length}/${NUM_RUNS} iteraciones completadas — mediana sobre runs exitosos`);
     }
 
     const allMetrics = lhrs.map((lhr) => extractCwv(lhr, { slug, url, label, timestamp }));
