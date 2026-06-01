@@ -17,6 +17,8 @@ configs/urls-{site}.json
 
 Les auditories s'executen amb configuració mòbil (375×812, limitació de xarxa simulada, només categoria de rendiment). La injecció de cookies persisteix entre navegacions, de manera que els banners de consentiment es gestionen abans que s'activi Lighthouse.
 
+El multiplicador de CPU es fixa a `cpuSlowdownMultiplier: 4` en lloc de deixar que Lighthouse el calibri automàticament. Els runners de GitHub Actions són màquines compartides i la velocitat de CPU disponible varia d'una execució a una altra; amb la calibració automàtica, Lighthouse mesuraria amb un throttling diferent cada cop, introduint variabilitat que no prové del lloc. El valor 4 és el que Lighthouse utilitza per defecte per a mòbil, de manera que el nivell de simulació no canvia, però sí que es torna consistent entre runs.
+
 Per cada slug, Lighthouse s'executa **3 vegades** i es guarda la **mediana** de cada mètrica (Performance Score, LCP, CLS, FCP, TBT, TTI, Speed Index). L'informe HTML que es puja a R2 correspon al run amb el valor de LCP medià. La mediana és preferible a la mitjana perquè és més robusta davant pics puntuals.
 
 ## Estructura d'emmagatzematge a R2

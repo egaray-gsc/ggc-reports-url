@@ -13,28 +13,30 @@
  *  5. Sube metrics.json + report.html a R2
  */
 
-import puppeteer from 'puppeteer';
-import { startFlow, generateReport } from 'lighthouse';
-import { execFile } from 'child_process';
-import { promisify } from 'util';
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
-import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
+import puppeteer from "puppeteer";
+import { startFlow, generateReport } from "lighthouse";
+import { execFile } from "child_process";
+import { promisify } from "util";
+import fs from "fs";
+import path from "path";
+import os from "os";
+import { fileURLToPath } from "url";
+import { createRequire } from "module";
 
-import { extractCwv } from './extract-cwv.js';
-import { uploadReport } from './upload-r2.js';
+import { extractCwv } from "./extract-cwv.js";
+import { uploadReport } from "./upload-r2.js";
 
 // Lighthouse throws PROTOCOL_TIMEOUT from async event handlers (e.g. _onSessionAttached)
 // that are outside the awaited call chain — the try/catch in the loop can't catch these.
 // Intercept here so the process survives and remaining iterations can run.
-process.on('unhandledRejection', (reason) => {
-  if (reason?.lhrRuntimeError || reason?.code === 'PROTOCOL_TIMEOUT') {
-    console.warn(`⚠️  Lighthouse protocol rejection (${reason.code ?? 'PROTOCOL_TIMEOUT'}) interceptado — continuando`);
+process.on("unhandledRejection", (reason) => {
+  if (reason?.lhrRuntimeError || reason?.code === "PROTOCOL_TIMEOUT") {
+    console.warn(
+      `⚠️  Lighthouse protocol rejection (${reason.code ?? "PROTOCOL_TIMEOUT"}) interceptado — continuando`,
+    );
     return;
   }
-  console.error('❌ Rechazo no capturado inesperado:', reason);
+  console.error("❌ Rechazo no capturado inesperado:", reason);
   process.exit(1);
 });
 
@@ -49,18 +51,20 @@ const getArg = (name) => {
   return idx !== -1 ? args[idx + 1] : null;
 };
 
-const slug = getArg('slug');
-const timestamp = getArg('timestamp');
-const urlsArg = getArg('urls') ?? 'configs/urls.json';
+const slug = getArg("slug");
+const timestamp = getArg("timestamp");
+const urlsArg = getArg("urls") ?? "configs/urls.json";
 
 if (!slug || !timestamp) {
-  console.error('Uso: node scripts/run-audit.js --slug <slug> --timestamp <YYYY-MM-DD_HHmmss> [--urls configs/urls.json]');
+  console.error(
+    "Uso: node scripts/run-audit.js --slug <slug> --timestamp <YYYY-MM-DD_HHmmss> [--urls configs/urls.json]",
+  );
   process.exit(1);
 }
 
 // ---------- cargar config de URL ----------
-const urlsPath = path.join(__dirname, '..', urlsArg);
-const urls = JSON.parse(fs.readFileSync(urlsPath, 'utf-8'));
+const urlsPath = path.join(__dirname, "..", urlsArg);
+const urls = JSON.parse(fs.readFileSync(urlsPath, "utf-8"));
 const entry = urls.find((u) => u.slug === slug);
 
 if (!entry) {
@@ -74,8 +78,8 @@ console.log(`  Timestamp: ${timestamp}\n`);
 
 // ---------- aceptar cookies ----------
 async function runAcceptCookies() {
-  const scriptPath = path.join(__dirname, 'accept-cookies.js');
-  console.log('🍪 Aceptando cookies...');
+  const scriptPath = path.join(__dirname, "accept-cookies.js");
+  console.log("🍪 Aceptando cookies...");
   try {
     const { stdout, stderr } = await execFileAsync(
       process.execPath,
@@ -85,7 +89,7 @@ async function runAcceptCookies() {
     if (stdout) process.stdout.write(stdout);
     if (stderr) process.stderr.write(stderr);
   } catch (err) {
-    console.warn('⚠️  accept-cookies.js falló:', err.message);
+    console.warn("⚠️  accept-cookies.js falló:", err.message);
     // Continuar igualmente — puede que no haya banner de consentimiento
   }
 }
@@ -95,27 +99,34 @@ function loadCookies() {
   const cookiePath = path.join(os.tmpdir(), `consent-cookies-${slug}.json`);
   if (!fs.existsSync(cookiePath)) return [];
 
-  const raw = JSON.parse(fs.readFileSync(cookiePath, 'utf-8'));
-  const VALID_SAME_SITE = ['Strict', 'Lax', 'None'];
+  const raw = JSON.parse(fs.readFileSync(cookiePath, "utf-8"));
+  const VALID_SAME_SITE = ["Strict", "Lax", "None"];
   return raw.map((c) => ({
     ...c,
     sameSite: VALID_SAME_SITE.includes(c.sameSite)
       ? c.sameSite
       : c.secure
-        ? 'None'
-        : 'Lax',
+        ? "None"
+        : "Lax",
   }));
 }
 
 const NUM_RUNS = 3;
 
 const LIGHTHOUSE_CONFIG = {
-  extends: 'lighthouse:default',
+  extends: "lighthouse:default",
   settings: {
-    formFactor: 'mobile',
-    screenEmulation: { mobile: true, width: 375, height: 812, deviceScaleFactor: 3 },
-    throttlingMethod: 'simulate',
-    onlyCategories: ['performance'],
+    formFactor: "mobile",
+    screenEmulation: {
+      mobile: true,
+      width: 375,
+      height: 812,
+      deviceScaleFactor: 3,
+    },
+    throttlingMethod: "simulate",
+    // Fixed multiplier instead of benchmark-based calibration — CI runners
+    throttling: { cpuSlowdownMultiplier: 4 },
+    onlyCategories: ["performance"],
     disableStorageReset: true,
     maxWaitForLoad: 90_000,
   },
@@ -131,12 +142,17 @@ function median(values) {
 function medianMetrics(allMetrics) {
   const result = { ...allMetrics[0] };
 
-  const perfScores = allMetrics.map((m) => m.performanceScore).filter((v) => v != null);
+  const perfScores = allMetrics
+    .map((m) => m.performanceScore)
+    .filter((v) => v != null);
   result.performanceScore = perfScores.length ? median(perfScores) : null;
 
-  for (const key of ['lcp', 'fcp', 'cls', 'tbt', 'tti', 'speedIndex']) {
+  for (const key of ["lcp", "fcp", "cls", "tbt", "tti", "speedIndex"]) {
     const valid = allMetrics.map((m) => m[key]).filter((e) => e?.value != null);
-    if (!valid.length) { result[key] = null; continue; }
+    if (!valid.length) {
+      result[key] = null;
+      continue;
+    }
     const sorted = [...valid].sort((a, b) => a.value - b.value);
     result[key] = sorted[Math.floor(sorted.length / 2)];
   }
@@ -144,17 +160,21 @@ function medianMetrics(allMetrics) {
   const lcpSorted = allMetrics
     .filter((m) => m.lcp?.value != null)
     .sort((a, b) => a.lcp.value - b.lcp.value);
-  if (lcpSorted.length) result.lcpElement = lcpSorted[Math.floor(lcpSorted.length / 2)].lcpElement;
+  if (lcpSorted.length)
+    result.lcpElement = lcpSorted[Math.floor(lcpSorted.length / 2)].lcpElement;
 
   return result;
 }
 
 function pickMedianLhr(lhrs) {
   const sorted = [...lhrs]
-    .filter((lhr) => lhr.audits?.['largest-contentful-paint']?.numericValue != null)
-    .sort((a, b) =>
-      a.audits['largest-contentful-paint'].numericValue -
-      b.audits['largest-contentful-paint'].numericValue,
+    .filter(
+      (lhr) => lhr.audits?.["largest-contentful-paint"]?.numericValue != null,
+    )
+    .sort(
+      (a, b) =>
+        a.audits["largest-contentful-paint"].numericValue -
+        b.audits["largest-contentful-paint"].numericValue,
     );
   return sorted[Math.floor(sorted.length / 2)] ?? lhrs[0];
 }
@@ -164,8 +184,8 @@ async function main() {
   await runAcceptCookies();
 
   const cookies = loadCookies();
-  const didomiCookie = cookies.find((c) => c.name === 'didomi_token');
-  const euCookie     = cookies.find((c) => c.name === 'euconsent-v2');
+  const didomiCookie = cookies.find((c) => c.name === "didomi_token");
+  const euCookie = cookies.find((c) => c.name === "euconsent-v2");
 
   const lhrs = [];
   for (let i = 0; i < NUM_RUNS; i++) {
@@ -176,7 +196,7 @@ async function main() {
       // PROTOCOL_TIMEOUT on one run doesn't poison the next.
       iterBrowser = await puppeteer.launch({
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
       });
       const page = await iterBrowser.newPage();
 
@@ -189,8 +209,8 @@ async function main() {
         await page.evaluateOnNewDocument(
           (didomiVal, euVal) => {
             try {
-              if (didomiVal) localStorage.setItem('didomi_token', didomiVal);
-              if (euVal)     localStorage.setItem('euconsent-v2', euVal);
+              if (didomiVal) localStorage.setItem("didomi_token", didomiVal);
+              if (euVal) localStorage.setItem("euconsent-v2", euVal);
             } catch {}
           },
           didomiCookie?.value ?? null,
@@ -204,47 +224,66 @@ async function main() {
       const lhr = flowResult.steps[0].lhr;
       lhrs.push(lhr);
 
-      const perf = lhr.categories?.performance?.score != null
-        ? Math.round(lhr.categories.performance.score * 100)
-        : 'N/A';
-      const lcpVal = lhr.audits?.['largest-contentful-paint']?.displayValue ?? 'N/A';
+      const perf =
+        lhr.categories?.performance?.score != null
+          ? Math.round(lhr.categories.performance.score * 100)
+          : "N/A";
+      const lcpVal =
+        lhr.audits?.["largest-contentful-paint"]?.displayValue ?? "N/A";
       console.log(`   → Perf: ${perf}  LCP: ${lcpVal}`);
     } catch (err) {
-      console.warn(`⚠️  Iteración ${i + 1} fallida (${err.code ?? err.message}) — se omite`);
+      console.warn(
+        `⚠️  Iteración ${i + 1} fallida (${err.code ?? err.message}) — se omite`,
+      );
     } finally {
       await iterBrowser?.close().catch(() => {});
     }
   }
 
   if (lhrs.length === 0) {
-    throw new Error(`Todas las iteraciones de Lighthouse fallaron para "${slug}"`);
+    throw new Error(
+      `Todas las iteraciones de Lighthouse fallaron para "${slug}"`,
+    );
   }
 
   if (lhrs.length < NUM_RUNS) {
-    console.warn(`⚠️  Solo ${lhrs.length}/${NUM_RUNS} iteraciones completadas — mediana sobre runs exitosos`);
+    console.warn(
+      `⚠️  Solo ${lhrs.length}/${NUM_RUNS} iteraciones completadas — mediana sobre runs exitosos`,
+    );
   }
 
-  const allMetrics = lhrs.map((lhr) => extractCwv(lhr, { slug, url, label, timestamp }));
+  const allMetrics = lhrs.map((lhr) =>
+    extractCwv(lhr, { slug, url, label, timestamp }),
+  );
   const metrics = medianMetrics(allMetrics);
-  const htmlReport = /** @type {string} */ (generateReport(pickMedianLhr(lhrs), 'html'));
+  const htmlReport = /** @type {string} */ (
+    generateReport(pickMedianLhr(lhrs), "html")
+  );
 
   console.log(`\n📊 Métricas medianas (${NUM_RUNS} runs):`);
   console.log(`   Performance: ${metrics.performanceScore}`);
-  console.log(`   LCP: ${metrics.lcp?.displayValue ?? 'N/A'}`);
-  console.log(`   CLS: ${metrics.cls?.displayValue ?? 'N/A'}`);
-  console.log(`   FCP: ${metrics.fcp?.displayValue ?? 'N/A'}`);
-  console.log(`   TBT: ${metrics.tbt?.displayValue ?? 'N/A'}`);
+  console.log(`   LCP: ${metrics.lcp?.displayValue ?? "N/A"}`);
+  console.log(`   CLS: ${metrics.cls?.displayValue ?? "N/A"}`);
+  console.log(`   FCP: ${metrics.fcp?.displayValue ?? "N/A"}`);
+  console.log(`   TBT: ${metrics.tbt?.displayValue ?? "N/A"}`);
   if (metrics.lcp?.phases) {
     const p = metrics.lcp.phases;
-    console.log(`   LCP phases → TTFB: ${p.ttfb}ms · LoadDelay: ${p.loadDelay}ms · LoadDuration: ${p.loadDuration}ms · RenderDelay: ${p.renderDelay}ms`);
+    console.log(
+      `   LCP phases → TTFB: ${p.ttfb}ms · LoadDelay: ${p.loadDelay}ms · LoadDuration: ${p.loadDuration}ms · RenderDelay: ${p.renderDelay}ms`,
+    );
   }
 
-  console.log('\n☁️  Subiendo a R2...');
-  await uploadReport(slug, timestamp, JSON.stringify(metrics, null, 2), htmlReport);
-  console.log('✅ Auditoría completada\n');
+  console.log("\n☁️  Subiendo a R2...");
+  await uploadReport(
+    slug,
+    timestamp,
+    JSON.stringify(metrics, null, 2),
+    htmlReport,
+  );
+  console.log("✅ Auditoría completada\n");
 }
 
 main().catch((err) => {
-  console.error('❌ Error en run-audit.js:', err);
+  console.error("❌ Error en run-audit.js:", err);
   process.exit(1);
 });
