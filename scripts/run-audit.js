@@ -26,6 +26,18 @@ import { createRequire } from 'module';
 import { extractCwv } from './extract-cwv.js';
 import { uploadReport } from './upload-r2.js';
 
+// Lighthouse throws PROTOCOL_TIMEOUT from async event handlers (e.g. _onSessionAttached)
+// that are outside the awaited call chain — the try/catch in the loop can't catch these.
+// Intercept here so the process survives and remaining iterations can run.
+process.on('unhandledRejection', (reason) => {
+  if (reason?.lhrRuntimeError || reason?.code === 'PROTOCOL_TIMEOUT') {
+    console.warn(`⚠️  Lighthouse protocol rejection (${reason.code ?? 'PROTOCOL_TIMEOUT'}) interceptado — continuando`);
+    return;
+  }
+  console.error('❌ Rechazo no capturado inesperado:', reason);
+  process.exit(1);
+});
+
 const execFileAsync = promisify(execFile);
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -155,81 +167,81 @@ async function main() {
   const didomiCookie = cookies.find((c) => c.name === 'didomi_token');
   const euCookie     = cookies.find((c) => c.name === 'euconsent-v2');
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+  const lhrs = [];
+  for (let i = 0; i < NUM_RUNS; i++) {
+    console.log(`\n🔦 Lighthouse — iteración ${i + 1}/${NUM_RUNS}...`);
+    let iterBrowser;
+    try {
+      // Fresh browser per iteration: isolates session/protocol state so a
+      // PROTOCOL_TIMEOUT on one run doesn't poison the next.
+      iterBrowser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+      const page = await iterBrowser.newPage();
 
-  try {
-    const page = await browser.newPage();
-
-    if (cookies.length > 0) {
-      await page.setCookie(...cookies);
-      console.log(`🍪 ${cookies.length} cookies inyectadas`);
-    }
-
-    if (didomiCookie || euCookie) {
-      await page.evaluateOnNewDocument(
-        (didomiVal, euVal) => {
-          try {
-            if (didomiVal) localStorage.setItem('didomi_token', didomiVal);
-            if (euVal)     localStorage.setItem('euconsent-v2', euVal);
-          } catch {}
-        },
-        didomiCookie?.value ?? null,
-        euCookie?.value ?? null,
-      );
-    }
-
-    const lhrs = [];
-    for (let i = 0; i < NUM_RUNS; i++) {
-      console.log(`\n🔦 Lighthouse — iteración ${i + 1}/${NUM_RUNS}...`);
-      try {
-        const flow = await startFlow(page, { config: LIGHTHOUSE_CONFIG });
-        await flow.navigate(url, { stepName: slug });
-        const flowResult = await flow.createFlowResult();
-        const lhr = flowResult.steps[0].lhr;
-        lhrs.push(lhr);
-
-        const perf = lhr.categories?.performance?.score != null
-          ? Math.round(lhr.categories.performance.score * 100)
-          : 'N/A';
-        const lcpVal = lhr.audits?.['largest-contentful-paint']?.displayValue ?? 'N/A';
-        console.log(`   → Perf: ${perf}  LCP: ${lcpVal}`);
-      } catch (err) {
-        console.warn(`⚠️  Iteración ${i + 1} fallida (${err.code ?? err.message}) — se omite`);
+      if (cookies.length > 0) {
+        await page.setCookie(...cookies);
+        if (i === 0) console.log(`🍪 ${cookies.length} cookies inyectadas`);
       }
+
+      if (didomiCookie || euCookie) {
+        await page.evaluateOnNewDocument(
+          (didomiVal, euVal) => {
+            try {
+              if (didomiVal) localStorage.setItem('didomi_token', didomiVal);
+              if (euVal)     localStorage.setItem('euconsent-v2', euVal);
+            } catch {}
+          },
+          didomiCookie?.value ?? null,
+          euCookie?.value ?? null,
+        );
+      }
+
+      const flow = await startFlow(page, { config: LIGHTHOUSE_CONFIG });
+      await flow.navigate(url, { stepName: slug });
+      const flowResult = await flow.createFlowResult();
+      const lhr = flowResult.steps[0].lhr;
+      lhrs.push(lhr);
+
+      const perf = lhr.categories?.performance?.score != null
+        ? Math.round(lhr.categories.performance.score * 100)
+        : 'N/A';
+      const lcpVal = lhr.audits?.['largest-contentful-paint']?.displayValue ?? 'N/A';
+      console.log(`   → Perf: ${perf}  LCP: ${lcpVal}`);
+    } catch (err) {
+      console.warn(`⚠️  Iteración ${i + 1} fallida (${err.code ?? err.message}) — se omite`);
+    } finally {
+      await iterBrowser?.close().catch(() => {});
     }
-
-    if (lhrs.length === 0) {
-      throw new Error(`Todas las iteraciones de Lighthouse fallaron para "${slug}"`);
-    }
-
-    if (lhrs.length < NUM_RUNS) {
-      console.warn(`⚠️  Solo ${lhrs.length}/${NUM_RUNS} iteraciones completadas — mediana sobre runs exitosos`);
-    }
-
-    const allMetrics = lhrs.map((lhr) => extractCwv(lhr, { slug, url, label, timestamp }));
-    const metrics = medianMetrics(allMetrics);
-    const htmlReport = /** @type {string} */ (generateReport(pickMedianLhr(lhrs), 'html'));
-
-    console.log(`\n📊 Métricas medianas (${NUM_RUNS} runs):`);
-    console.log(`   Performance: ${metrics.performanceScore}`);
-    console.log(`   LCP: ${metrics.lcp?.displayValue ?? 'N/A'}`);
-    console.log(`   CLS: ${metrics.cls?.displayValue ?? 'N/A'}`);
-    console.log(`   FCP: ${metrics.fcp?.displayValue ?? 'N/A'}`);
-    console.log(`   TBT: ${metrics.tbt?.displayValue ?? 'N/A'}`);
-    if (metrics.lcp?.phases) {
-      const p = metrics.lcp.phases;
-      console.log(`   LCP phases → TTFB: ${p.ttfb}ms · LoadDelay: ${p.loadDelay}ms · LoadDuration: ${p.loadDuration}ms · RenderDelay: ${p.renderDelay}ms`);
-    }
-
-    console.log('\n☁️  Subiendo a R2...');
-    await uploadReport(slug, timestamp, JSON.stringify(metrics, null, 2), htmlReport);
-    console.log('✅ Auditoría completada\n');
-  } finally {
-    await browser.close();
   }
+
+  if (lhrs.length === 0) {
+    throw new Error(`Todas las iteraciones de Lighthouse fallaron para "${slug}"`);
+  }
+
+  if (lhrs.length < NUM_RUNS) {
+    console.warn(`⚠️  Solo ${lhrs.length}/${NUM_RUNS} iteraciones completadas — mediana sobre runs exitosos`);
+  }
+
+  const allMetrics = lhrs.map((lhr) => extractCwv(lhr, { slug, url, label, timestamp }));
+  const metrics = medianMetrics(allMetrics);
+  const htmlReport = /** @type {string} */ (generateReport(pickMedianLhr(lhrs), 'html'));
+
+  console.log(`\n📊 Métricas medianas (${NUM_RUNS} runs):`);
+  console.log(`   Performance: ${metrics.performanceScore}`);
+  console.log(`   LCP: ${metrics.lcp?.displayValue ?? 'N/A'}`);
+  console.log(`   CLS: ${metrics.cls?.displayValue ?? 'N/A'}`);
+  console.log(`   FCP: ${metrics.fcp?.displayValue ?? 'N/A'}`);
+  console.log(`   TBT: ${metrics.tbt?.displayValue ?? 'N/A'}`);
+  if (metrics.lcp?.phases) {
+    const p = metrics.lcp.phases;
+    console.log(`   LCP phases → TTFB: ${p.ttfb}ms · LoadDelay: ${p.loadDelay}ms · LoadDuration: ${p.loadDuration}ms · RenderDelay: ${p.renderDelay}ms`);
+  }
+
+  console.log('\n☁️  Subiendo a R2...');
+  await uploadReport(slug, timestamp, JSON.stringify(metrics, null, 2), htmlReport);
+  console.log('✅ Auditoría completada\n');
 }
 
 main().catch((err) => {

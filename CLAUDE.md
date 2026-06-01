@@ -100,6 +100,15 @@ reports-url/
 
 Audits run mobile-first (375×812, 3× density, simulated throttling). Storage reset is disabled so injected cookies/localStorage persist across navigation. Only the performance category is audited.
 
+### Lighthouse multi-run strategy
+
+Each audit runs Lighthouse 3 times (`NUM_RUNS = 3`) and reports the median to reduce noise. Key implementation details in `run-audit.js`:
+
+- **`lhrs` array** — accumulates the LHR (Lighthouse Result) object from each successful iteration. After the loop it holds between 1 and 3 entries. Used to compute median metrics (`medianMetrics`) and pick the median LHR for the HTML report (`pickMedianLhr`).
+- **Browser per iteration** — each iteration launches its own Puppeteer browser and closes it in `finally`. This isolates CDP session state: a `PROTOCOL_TIMEOUT` on one run doesn't corrupt subsequent runs.
+- **`unhandledRejection` handler** — Lighthouse throws `PROTOCOL_TIMEOUT` from async event handlers (`_onSessionAttached`) that are outside the awaited call chain, so the `try/catch` inside the loop cannot catch them. The top-level handler intercepts errors with `lhrRuntimeError: true` or `code === 'PROTOCOL_TIMEOUT'` and lets the process continue. Any other unhandled rejection still exits with code 1.
+- If at least one iteration succeeds, metrics are uploaded and the audit is considered complete. If all 3 fail, the script exits with code 1 (no data uploaded → gap in the chart is expected).
+
 ## CI/CD
 
 - **cwv-audit.yml** — Manual trigger; matrix of slugs runs in parallel; generates Madrid-timezone timestamp
