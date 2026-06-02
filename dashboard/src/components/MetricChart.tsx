@@ -154,10 +154,22 @@ const CustomTooltip = ({
   );
 };
 
+const MA_WINDOW = 7;
+
+function computeRollingAvg(values: (number | null)[]): (number | null)[] {
+  return values.map((_, i) => {
+    const slice = values
+      .slice(Math.max(0, i - MA_WINDOW + 1), i + 1)
+      .filter((v): v is number => v != null);
+    return slice.length >= 2 ? slice.reduce((a, b) => a + b, 0) / slice.length : null;
+  });
+}
+
 export function MetricChart({ data, activeMetric, dateRange }: Props) {
   const meta = METRICS.find((m) => m.key === activeMetric)!;
   const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+  const [showMA, setShowMA] = useState(false);
 
   useEffect(() => {
     setSelectedSlugs(new Set());
@@ -204,6 +216,18 @@ export function MetricChart({ data, activeMetric, dateRange }: Props) {
       }
     });
     return entry;
+  });
+
+  // Rolling average per slug (MA_WINDOW runs)
+  data.urls.forEach((urlData) => {
+    const values = chartData.map((e) => {
+      const v = e[urlData.slug];
+      return typeof v === "number" ? v : null;
+    });
+    const avgs = computeRollingAvg(values);
+    avgs.forEach((avg, i) => {
+      chartData[i][`${urlData.slug}__ma`] = avg;
+    });
   });
 
   // Resolver cada hito al timestamp más cercano, descartando los que quedan fuera del rango de datos
@@ -334,6 +358,29 @@ export function MetricChart({ data, activeMetric, dateRange }: Props) {
             />
           ))}
 
+          {/* Rolling average lines — rendered first so raw dots appear on top */}
+          {data.urls.map((urlData, i) => {
+            const stroke = URL_COLORS[i % URL_COLORS.length];
+            return (
+              <Line
+                key={`${urlData.slug}__ma`}
+                type="monotone"
+                dataKey={`${urlData.slug}__ma`}
+                stroke={stroke}
+                strokeWidth={2}
+                strokeDasharray="6 3"
+                dot={false}
+                activeDot={false}
+                connectNulls={false}
+                legendType="none"
+                hide={
+                  !showMA ||
+                  (selectedSlugs.size > 0 && !selectedSlugs.has(urlData.slug))
+                }
+              />
+            );
+          })}
+
           {data.urls.map((urlData, i) => {
             const stroke = URL_COLORS[i % URL_COLORS.length];
             return (
@@ -389,6 +436,33 @@ export function MetricChart({ data, activeMetric, dateRange }: Props) {
           paddingTop: 10,
         }}
       >
+        <button
+          onClick={() => setShowMA((v) => !v)}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontSize: 11,
+            color: showMA ? "#e5e7eb" : "#6b7280",
+            background: showMA ? "#1f2937" : "transparent",
+            border: `1px solid ${showMA ? "#4b5563" : "#374151"}`,
+            borderRadius: 4,
+            padding: "2px 8px",
+            cursor: "pointer",
+            marginRight: 4,
+            transition: "all 0.15s",
+          }}
+        >
+          <svg width="18" height="6">
+            <line
+              x1="0" y1="3" x2="18" y2="3"
+              stroke={showMA ? "#e5e7eb" : "#6b7280"}
+              strokeWidth="2"
+              strokeDasharray="6 3"
+            />
+          </svg>
+          <span>avg {MA_WINDOW} runs</span>
+        </button>
         {data.urls.map((urlData, i) => {
           const color = URL_COLORS[i % URL_COLORS.length];
           const isSelected = selectedSlugs.has(urlData.slug);
