@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { DashboardData, MetricKey } from "./types";
+import type { DashboardData, MetricKey, MilestoneConfig } from "./types";
 import { MetricToggle } from "./components/MetricToggle";
 import { MetricChart } from "./components/MetricChart";
 import urlsLv from "../../configs/urls-lv.json";
@@ -10,6 +10,40 @@ const R2_BASE_URL = import.meta.env.VITE_R2_BASE_URL ?? "";
 
 type Site = "lv" | "md";
 export type DateRange = "7d" | "30d" | "90d" | "all";
+
+const MILESTONES_SHEET_ID = import.meta.env.VITE_MILESTONES_SHEET_ID ?? "";
+
+function parseMilestonesGviz(text: string): MilestoneConfig[] {
+  try {
+    const json = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
+    const { cols, rows } = json.table ?? {};
+    if (!cols || !rows) return [];
+    // Normalize headers to lowercase so "Date"/"Label"/"Color" work too
+    const headers: string[] = cols.map((c: { label: string }) => c.label.toLowerCase().trim());
+    const types: string[] = cols.map((c: { type: string }) => c.type);
+    return rows
+      .map((r: { c: Array<{ v: unknown; f?: string } | null> }) => {
+        const obj: Record<string, string> = {};
+        r.c?.forEach((cell: { v: unknown; f?: string } | null, i: number) => {
+          if (cell?.v == null) return;
+          if (types[i] === "date") {
+            // gviz date format: "Date(2026,4,25)" — month is 0-indexed
+            const m = String(cell.v).match(/Date\((\d+),(\d+),(\d+)\)/);
+            if (m) {
+              const [, y, mo, d] = m;
+              obj[headers[i]] = `${y}-${String(Number(mo) + 1).padStart(2, "0")}-${String(Number(d)).padStart(2, "0")}`;
+            }
+          } else {
+            obj[headers[i]] = String(cell.v);
+          }
+        });
+        return obj;
+      })
+      .filter((m: Record<string, string>) => m.date && m.label) as MilestoneConfig[];
+  } catch {
+    return [];
+  }
+}
 
 const DATE_RANGES: { id: DateRange; label: string }[] = [
   { id: "7d",  label: "7 días" },
@@ -35,6 +69,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [activeMetric, setActiveMetric] = useState<MetricKey>("lcp");
   const [dateRange, setDateRange] = useState<DateRange>("30d");
+  const [milestones, setMilestones] = useState<MilestoneConfig[]>([]);
 
   useEffect(() => {
     const current = SITES.find((s) => s.id === site)!;
@@ -50,6 +85,15 @@ export default function App() {
       .then(setData)
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
+  }, [site]);
+
+  useEffect(() => {
+    if (!MILESTONES_SHEET_ID) { setMilestones([]); return; }
+    const url = `https://docs.google.com/spreadsheets/d/${MILESTONES_SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=milestones-${site}`;
+    fetch(url, { cache: "no-store" })
+      .then((r) => (r.ok ? r.text() : ""))
+      .then((text) => setMilestones(text ? parseMilestonesGviz(text) : []))
+      .catch(() => setMilestones([]));
   }, [site]);
 
   const updatedAt = data
@@ -108,7 +152,12 @@ export default function App() {
                   ))}
                 </nav>
               </div>
-              <MetricChart data={data} activeMetric={activeMetric} dateRange={dateRange} />
+              <MetricChart
+                data={data}
+                activeMetric={activeMetric}
+                dateRange={dateRange}
+                milestones={milestones}
+              />
             </section>
 
             <details className="url-details">

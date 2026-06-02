@@ -36,6 +36,7 @@ jobs:
         working-directory: dashboard
         env:
           VITE_R2_BASE_URL: ${{ secrets.R2_BASE_URL }}
+          VITE_MILESTONES_SHEET_ID: ${{ secrets.MILESTONES_SHEET_ID }}
         run: pnpm run build
 
       - uses: actions/upload-pages-artifact@v3

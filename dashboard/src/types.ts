@@ -65,3 +65,9 @@ export const URL_COLORS = [
   '#60a5fa', '#34d399', '#f472b6', '#fbbf24',
   '#a78bfa', '#fb923c', '#4ade80', '#f87171',
 ];
+
+export interface MilestoneConfig {
+  date: string;
+  label: string;
+  color?: string;
+}

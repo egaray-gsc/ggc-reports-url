@@ -11,20 +11,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { METRICS, URL_COLORS } from "../types";
-import type { DashboardData, MetricKey, RunMetrics } from "../types";
+import type { DashboardData, MetricKey, MilestoneConfig, RunMetrics } from "../types";
 import type { DateRange } from "../App";
-import milestonesConfig from "../milestones.json";
-
-interface MilestoneConfig {
-  date: string;
-  label: string;
-  color?: string;
-}
 
 interface Props {
   data: DashboardData;
   activeMetric: MetricKey;
   dateRange: DateRange;
+  milestones: MilestoneConfig[];
 }
 
 function getMetricValue(run: RunMetrics, key: MetricKey): number | null {
@@ -165,7 +159,7 @@ function computeRollingAvg(values: (number | null)[]): (number | null)[] {
   });
 }
 
-export function MetricChart({ data, activeMetric, dateRange }: Props) {
+export function MetricChart({ data, activeMetric, dateRange, milestones }: Props) {
   const meta = METRICS.find((m) => m.key === activeMetric)!;
   const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
@@ -231,7 +225,7 @@ export function MetricChart({ data, activeMetric, dateRange }: Props) {
   });
 
   // Resolver cada hito al timestamp más cercano, descartando los que quedan fuera del rango de datos
-  const milestones = (milestonesConfig as MilestoneConfig[]).flatMap((m) => {
+  const resolvedMilestones = milestones.flatMap((m) => {
     if (allTimestamps.length === 0) return [];
     const mTime = new Date(m.date).getTime();
     const firstTime = new Date(allTimestamps[0]).getTime();
@@ -341,7 +335,7 @@ export function MetricChart({ data, activeMetric, dateRange }: Props) {
             }
           />
 
-          {milestones.map((m) => (
+          {resolvedMilestones.map((m) => (
             <ReferenceLine
               key={`${m.ts}-${m.label}`}
               x={m.ts}
