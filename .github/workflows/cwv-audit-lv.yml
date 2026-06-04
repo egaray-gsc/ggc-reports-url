@@ -35,7 +35,7 @@ jobs:
 
   audit:
     needs: prepare
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, ggc-internal]
     strategy:
       matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
       fail-fast: false
@@ -48,8 +48,6 @@ jobs:
           node-version: 22
 
       - uses: pnpm/action-setup@v4
-
-      - uses: browser-actions/setup-chrome@v1
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
