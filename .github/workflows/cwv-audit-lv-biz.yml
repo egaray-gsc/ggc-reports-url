@@ -1,8 +1,8 @@
-name: CWV Audit MD
+name: CWV Audit LV BIZ
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours
+    - cron: "0 */6 * * 1-5" # every 6 hours, Mon–Fri only
   workflow_dispatch:
 
 jobs:
@@ -25,17 +25,17 @@ jobs:
       - uses: pnpm/action-setup@v4
 
       - id: set-matrix
-        name: Build matrix from urls-md.json
+        name: Build matrix from urls-lv-biz.json
         run: |
           node --input-type=module <<'EOF' >> "$GITHUB_OUTPUT"
           import { readFileSync } from 'fs';
-          const urls = JSON.parse(readFileSync('./configs/urls-md.json', 'utf-8'));
+          const urls = JSON.parse(readFileSync('./configs/urls-lv-biz.json', 'utf-8'));
           process.stdout.write('matrix=' + JSON.stringify({ slug: urls.map(u => u.slug) }) + '\n');
           EOF
 
   audit:
     needs: prepare
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, ggc-internal]
     strategy:
       matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
       fail-fast: false
@@ -63,7 +63,7 @@ jobs:
           node scripts/run-audit.js \
             --slug "${{ matrix.slug }}" \
             --timestamp "${{ needs.prepare.outputs.timestamp }}" \
-            --urls configs/urls-md.json
+            --urls configs/urls-lv-biz.json
 
   aggregate:
     needs: audit
@@ -82,11 +82,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Aggregate metrics → dashboard-data-md.json
+      - name: Aggregate metrics → dashboard-data-lv-biz.json
         env:
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
           R2_BASE_URL: ${{ secrets.R2_BASE_URL }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: node scripts/aggregate-metrics.js --urls configs/urls-md.json --output dashboard-data-md.json
+        run: node scripts/aggregate-metrics.js --urls configs/urls-lv-biz.json --output dashboard-data-lv-biz.json

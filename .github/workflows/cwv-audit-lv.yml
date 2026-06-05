@@ -35,7 +35,7 @@ jobs:
 
   audit:
     needs: prepare
-    runs-on: [self-hosted, ggc-internal]
+    runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
       fail-fast: false

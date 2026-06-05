@@ -2,7 +2,7 @@ name: CWV Audit MD BIZ
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours
+    - cron: "0 */6 * * 1-5" # every 6 hours, Mon–Fri only
   workflow_dispatch:
 
 jobs:
