@@ -413,7 +413,8 @@ export function MetricChart({ data, activeMetric, dateRange, milestones }: Props
                 }}
                 connectNulls={false}
                 hide={
-                  selectedSlugs.size > 0 && !selectedSlugs.has(urlData.slug)
+                  showMA ||
+                  (selectedSlugs.size > 0 && !selectedSlugs.has(urlData.slug))
                 }
               />
             );
