@@ -285,19 +285,19 @@ export function MetricChart({ data, activeMetric, dateRange, milestones }: Props
           <ReferenceArea
             y1={goodBottom}
             y2={goodTop}
-            fill="rgba(34,197,94,0.08)"
+            fill="rgba(34,197,94,0.18)"
             ifOverflow="hidden"
           />
           <ReferenceArea
             y1={warnBottom}
             y2={warnTop}
-            fill="rgba(245,158,11,0.12)"
+            fill="rgba(245,158,11,0.20)"
             ifOverflow="hidden"
           />
           <ReferenceArea
             y1={badBottom}
             y2={badTop}
-            fill="rgba(239,68,68,0.1)"
+            fill="rgba(239,68,68,0.18)"
             ifOverflow="hidden"
           />
 
