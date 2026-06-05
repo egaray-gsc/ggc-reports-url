@@ -1,0 +1,92 @@
+name: CWV Audit MD BIZ
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch:
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      timestamp: ${{ steps.ts.outputs.timestamp }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: ts
+        name: Generate timestamp
+        run: echo "timestamp=$(TZ='Europe/Madrid' date +'%Y-%m-%d_%H%M%S')" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v4
+
+      - id: set-matrix
+        name: Build matrix from urls-md-biz.json
+        run: |
+          node --input-type=module <<'EOF' >> "$GITHUB_OUTPUT"
+          import { readFileSync } from 'fs';
+          const urls = JSON.parse(readFileSync('./configs/urls-md-biz.json', 'utf-8'));
+          process.stdout.write('matrix=' + JSON.stringify({ slug: urls.map(u => u.slug) }) + '\n');
+          EOF
+
+  audit:
+    needs: prepare
+    runs-on: [self-hosted, ggc-internal]
+    strategy:
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run audit — ${{ matrix.slug }}
+        env:
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BASE_URL: ${{ secrets.R2_BASE_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          node scripts/run-audit.js \
+            --slug "${{ matrix.slug }}" \
+            --timestamp "${{ needs.prepare.outputs.timestamp }}" \
+            --urls configs/urls-md-biz.json
+
+  aggregate:
+    needs: audit
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Aggregate metrics → dashboard-data-md-biz.json
+        env:
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BASE_URL: ${{ secrets.R2_BASE_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: node scripts/aggregate-metrics.js --urls configs/urls-md-biz.json --output dashboard-data-md-biz.json
