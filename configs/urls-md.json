@@ -6,27 +6,45 @@
     "cookieDomain": "mundodeportivo.com"
   },
   {
-    "slug": "Section MD",
+    "slug": "Section 1 MD",
     "url": "https://www.mundodeportivo.com/futbol",
-    "label": "Section",
+    "label": "Section 1",
     "cookieDomain": "mundodeportivo.com"
   },
   {
-    "slug": "Story MD",
-    "url": "https://www.mundodeportivo.com/actualidad/20260505/1004179368/oficial-hacienda-planta-partir-exige-todos-contribuyentes-espana-no-atender-llamadas-telefonicas-agencia-tributaria-dct.html",
-    "label": "Story",
-    "cookieDomain": "mundodeportivo.com"
-  },
-  {
-    "slug": "Video Story MD",
-    "url": "https://www.mundodeportivo.com/futbol/fc-barcelona/20260512/1004182216/flick-habla-lewandowski-rashford-balde-kounde-clave-futuro.html",
-    "label": "Video Story",
+    "slug": "Section 2 MD",
+    "url": "https://www.mundodeportivo.com/solomoto",
+    "label": "Section 2",
     "cookieDomain": "mundodeportivo.com"
   },
   {
     "slug": "Solomoto Story MD",
-    "url": "https://www.mundodeportivo.com/solomoto/pruebas-motos/20260429/1004175792/prueba-metzeler-sportec-01-sportec-01-rs-carretera-circuito-prefieras.html",
+    "url": "https://www.mundodeportivo.com/solomoto/20260605/1560079/nuevo-juguete-bimota-ligero-adictivo-llama-kb398-v2.html",
     "label": "Solomoto Story",
+    "cookieDomain": "mundodeportivo.com"
+  },
+  {
+    "slug": "Story MD",
+    "url": "https://www.mundodeportivo.com/futbol/20260605/1560084/inigualable-palmares-leo-messi-premio-princesa-asturias-deportes-2026.html",
+    "label": "Story",
+    "cookieDomain": "mundodeportivo.com"
+  },
+  {
+    "slug": "Opinion MD",
+    "url": "https://www.mundodeportivo.com/futbol/fc-barcelona/20260605/1560087/mejor-historia.html",
+    "label": "Opinion",
+    "cookieDomain": "mundodeportivo.com"
+  },
+  {
+    "slug": "Gallery MD",
+    "url": "https://www.mundodeportivo.com/elotromundo/gente/20260605/1560091/aitana-abre-album-ultimos-dias-inicio-nueva-gira.html",
+    "label": "Gallery",
+    "cookieDomain": "mundodeportivo.com"
+  },
+  {
+    "slug": "Video News MD",
+    "url": "https://www.mundodeportivo.com/futbol/real-madrid/20260605/1560089/florentino-adelanta-fichaje-mourinho-enrique-riquelme-promete-haaland-rodri.html",
+    "label": "Video News",
     "cookieDomain": "mundodeportivo.com"
   }
 ]
