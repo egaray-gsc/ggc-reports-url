@@ -4,22 +4,28 @@ import { MetricToggle } from "./components/MetricToggle";
 import { MetricChart } from "./components/MetricChart";
 import urlsLv from "../../configs/urls-lv.json";
 import urlsMd from "../../configs/urls-md.json";
+import urlsLvBiz from "../../configs/urls-lv-biz.json";
+import urlsMdBiz from "../../configs/urls-md-biz.json";
 import "./App.css";
 
 const R2_BASE_URL = import.meta.env.VITE_R2_BASE_URL ?? "";
 
-type Site = "lv" | "md";
+type Site = "lv" | "md" | "lv-biz" | "md-biz";
 export type DateRange = "7d" | "30d" | "90d" | "all";
 
 const MILESTONES_SHEET_ID = import.meta.env.VITE_MILESTONES_SHEET_ID ?? "";
 
 function parseMilestonesGviz(text: string): MilestoneConfig[] {
   try {
-    const json = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
+    const json = JSON.parse(
+      text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1),
+    );
     const { cols, rows } = json.table ?? {};
     if (!cols || !rows) return [];
     // Normalize headers to lowercase so "Date"/"Label"/"Color" work too
-    const headers: string[] = cols.map((c: { label: string }) => c.label.toLowerCase().trim());
+    const headers: string[] = cols.map((c: { label: string }) =>
+      c.label.toLowerCase().trim(),
+    );
     const types: string[] = cols.map((c: { type: string }) => c.type);
     return rows
       .map((r: { c: Array<{ v: unknown; f?: string } | null> }) => {
@@ -31,7 +37,8 @@ function parseMilestonesGviz(text: string): MilestoneConfig[] {
             const m = String(cell.v).match(/Date\((\d+),(\d+),(\d+)\)/);
             if (m) {
               const [, y, mo, d] = m;
-              obj[headers[i]] = `${y}-${String(Number(mo) + 1).padStart(2, "0")}-${String(Number(d)).padStart(2, "0")}`;
+              obj[headers[i]] =
+                `${y}-${String(Number(mo) + 1).padStart(2, "0")}-${String(Number(d)).padStart(2, "0")}`;
             }
           } else {
             obj[headers[i]] = String(cell.v);
@@ -39,14 +46,16 @@ function parseMilestonesGviz(text: string): MilestoneConfig[] {
         });
         return obj;
       })
-      .filter((m: Record<string, string>) => m.date && m.label) as MilestoneConfig[];
+      .filter(
+        (m: Record<string, string>) => m.date && m.label,
+      ) as MilestoneConfig[];
   } catch {
     return [];
   }
 }
 
 const DATE_RANGES: { id: DateRange; label: string }[] = [
-  { id: "7d",  label: "7 días" },
+  { id: "7d", label: "7 días" },
   { id: "30d", label: "30 días" },
   { id: "90d", label: "90 días" },
   { id: "all", label: "Todo" },
@@ -55,11 +64,18 @@ const DATE_RANGES: { id: DateRange; label: string }[] = [
 const SITES: { id: Site; label: string; file: string }[] = [
   { id: "lv", label: "La Vanguardia", file: "dashboard-data-lv.json" },
   { id: "md", label: "Mundo Deportivo", file: "dashboard-data-md.json" },
+  // { id: "lv-biz", label: "LV Biz", file: "dashboard-data-lv-biz.json" },
+  { id: "md-biz", label: "MD Biz", file: "dashboard-data-md-biz.json" },
 ];
 
-const CONFIG_URLS: Record<Site, { slug: string; label: string; url: string }[]> = {
+const CONFIG_URLS: Record<
+  Site,
+  { slug: string; label: string; url: string }[]
+> = {
   lv: urlsLv,
   md: urlsMd,
+  "lv-biz": urlsLvBiz,
+  "md-biz": urlsMdBiz,
 };
 
 export default function App() {
@@ -88,7 +104,10 @@ export default function App() {
   }, [site]);
 
   useEffect(() => {
-    if (!MILESTONES_SHEET_ID) { setMilestones([]); return; }
+    if (!MILESTONES_SHEET_ID) {
+      setMilestones([]);
+      return;
+    }
     const url = `https://docs.google.com/spreadsheets/d/${MILESTONES_SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=milestones-${site}`;
     fetch(url, { cache: "no-store" })
       .then((r) => (r.ok ? r.text() : ""))
@@ -111,7 +130,7 @@ export default function App() {
           <nav className="site-nav">
             {SITES.map((s) => (
               <button
-                key={s.id}
+                key={s.file}
                 className={`site-btn${site === s.id ? " active" : ""}`}
                 onClick={() => setSite(s.id)}
               >

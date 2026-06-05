@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "Home MD BIZ",
+    "url": "https://www.mundodeportivo.biz/",
+    "label": "Home",
+    "cookieDomain": "mundodeportivo.biz"
+  },
+  {
+    "slug": "Section MD BIZ",
+    "url": "https://www.mundodeportivo.biz/actualidad",
+    "label": "Section",
+    "cookieDomain": "mundodeportivo.biz"
+  },
+  {
+    "slug": "Story MD BIZ",
+    "url": "https://www.mundodeportivo.biz/actualidad/20260505/1004179368/oficial-hacienda-planta-partir-exige-todos-contribuyentes-espana-no-atender-llamadas-telefonicas-agencia-tributaria-dct.html",
+    "label": "Story",
+    "cookieDomain": "mundodeportivo.biz"
+  },
+  {
+    "slug": "Video Story MD BIZ",
+    "url": "https://www.mundodeportivo.biz/futbol/fc-barcelona/20260512/1004182216/flick-habla-lewandowski-rashford-balde-kounde-clave-futuro.html",
+    "label": "Video Story",
+    "cookieDomain": "mundodeportivo.biz"
+  },
+  {
+    "slug": "Solomoto Story MD BIZ",
+    "url": "https://www.mundodeportivo.biz/solomoto/pruebas-motos/20260429/1004175792/prueba-metzeler-sportec-01-sportec-01-rs-carretera-circuito-prefieras.html",
+    "label": "Solomoto Story",
+    "cookieDomain": "mundodeportivo.biz"
+  }
+]

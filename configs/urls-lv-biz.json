@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "Home LV BIZ",
+    "url": "https://www.lavanguardia.biz/",
+    "label": "Home",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Section LV BIZ",
+    "url": "https://www.lavanguardia.biz/internacional",
+    "label": "Section",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Story LV BIZ",
+    "url": "https://www.lavanguardia.biz/relatos/20260425/11522565/manel-ruiz-maestro-relojero-gran-error-mucha-gente-bizprarse-reloj-lujo-pensando-dara-hora-perfecta-no-es-importante-gvm.html",
+    "label": "Story",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Video Story LV BIZ",
+    "url": "https://www.lavanguardia.biz/internacional/20260515/11539048/trump-llega-tramo-final-visita-china-rica-simbolismo-pobre-concreciones.html",
+    "label": "Video Story",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Moveo Story LV BIZ",
+    "url": "https://www.lavanguardia.biz/motor/actualidad/20260512/11532388/enric-roche-medico-vascular-tomar-aspirina-viajar-prevenir-problemas-circulacion-ninguna-base-cientifica.html",
+    "label": "Moveo Story",
+    "cookieDomain": "lavanguardia.biz"
+  }
+]
