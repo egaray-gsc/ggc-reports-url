@@ -126,7 +126,22 @@ export default function App() {
     <div className="app">
       <header className="header">
         <div className="header-inner">
-          <h1 className="title">CWV Dashboard</h1>
+          <h1 className="title">
+            CWV Dashboard
+            <a
+              href="https://github.com/egaray-gsc/ggc-reports-url#readme"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="info-link"
+              aria-label="Ver documentación del proyecto"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </a>
+          </h1>
           <nav className="site-nav">
             {SITES.map((s) => (
               <button

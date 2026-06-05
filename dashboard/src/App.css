@@ -47,6 +47,25 @@
   letter-spacing: -0.02em;
 }
 
+.info-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  color: var(--text-muted);
+  text-decoration: none;
+  vertical-align: middle;
+  transition: color .15s;
+}
+
+.info-link:hover {
+  color: var(--accent);
+}
+
+.info-link svg {
+  width: 16px;
+  height: 16px;
+}
+
 .updated {
   font-size: 0.75rem;
   color: var(--text-muted);
