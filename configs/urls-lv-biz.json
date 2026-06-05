@@ -6,27 +6,51 @@
     "cookieDomain": "lavanguardia.biz"
   },
   {
-    "slug": "Section LV BIZ",
+    "slug": "Section 1 LV BIZ",
     "url": "https://www.lavanguardia.biz/internacional",
-    "label": "Section",
+    "label": "Section 1",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Section 2 LV BIZ",
+    "url": "https://www.lavanguardia.biz/cribeo",
+    "label": "Section 2",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Story Cribeo LV BIZ",
+    "url": "https://www.lavanguardia.biz/cribeo/20260605/3528168/russell-crowe-actor-62-anos-alcohol-parte-mi-herencia-cultural-he-cambiado-mi-forma-consumirlo.html",
+    "label": "Story Cribeo",
     "cookieDomain": "lavanguardia.biz"
   },
   {
     "slug": "Story LV BIZ",
-    "url": "https://www.lavanguardia.biz/relatos/20260425/11522565/manel-ruiz-maestro-relojero-gran-error-mucha-gente-bizprarse-reloj-lujo-pensando-dara-hora-perfecta-no-es-importante-gvm.html",
+    "url": "https://www.lavanguardia.biz/motor/20260605/3528215/biz-maribel-vicente-viven-autocaravana-5-anos-mas-economico-vivir-piso.html",
     "label": "Story",
     "cookieDomain": "lavanguardia.biz"
   },
   {
-    "slug": "Video Story LV BIZ",
-    "url": "https://www.lavanguardia.biz/internacional/20260515/11539048/trump-llega-tramo-final-visita-china-rica-simbolismo-pobre-concreciones.html",
-    "label": "Video Story",
+    "slug": "Story Video LV BIZ",
+    "url": "https://www.lavanguardia.biz/politica/20260605/3528217/biz-sanchez-busca-prender-barcelona-mecha-frente-progresista-internacional.html",
+    "label": "Story Video",
     "cookieDomain": "lavanguardia.biz"
   },
   {
-    "slug": "Moveo Story LV BIZ",
-    "url": "https://www.lavanguardia.biz/motor/actualidad/20260512/11532388/enric-roche-medico-vascular-tomar-aspirina-viajar-prevenir-problemas-circulacion-ninguna-base-cientifica.html",
-    "label": "Moveo Story",
+    "slug": "Opinion LV BIZ",
+    "url": "https://www.lavanguardia.biz/deportes/real-madrid/20260605/3528260/biz-florentino-perez-vulnerable.html",
+    "label": "Opinion",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Gallery LV BIZ",
+    "url": "https://www.lavanguardia.biz/motor/20260605/3528278/biz-mejores-momentos-gala-entrega-premios-moveo.html",
+    "label": "Gallery",
+    "cookieDomain": "lavanguardia.biz"
+  },
+  {
+    "slug": "Videonoticia LV BIZ",
+    "url": "https://www.lavanguardia.biz/comer/20260605/3528326/biz-paella-expres-promete-saborear-espana-cinco-minutos.html",
+    "label": "Videonoticia",
     "cookieDomain": "lavanguardia.biz"
   }
 ]

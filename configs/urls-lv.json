@@ -6,27 +6,51 @@
     "cookieDomain": "lavanguardia.com"
   },
   {
-    "slug": "Section LV",
+    "slug": "Section 1 LV",
     "url": "https://www.lavanguardia.com/internacional",
-    "label": "Section",
+    "label": "Section 1",
+    "cookieDomain": "lavanguardia.com"
+  },
+  {
+    "slug": "Section 2 LV",
+    "url": "https://www.lavanguardia.com/cribeo",
+    "label": "Section 2",
+    "cookieDomain": "lavanguardia.com"
+  },
+  {
+    "slug": "Story Cribeo LV",
+    "url": "https://www.lavanguardia.com/cribeo/20260519/11542082/russell-crowe-actor-62-anos-alcohol-parte-herencia-cultural-cambiado-mi-forma-consumirlo-gvm.html",
+    "label": "Story Cribeo",
     "cookieDomain": "lavanguardia.com"
   },
   {
     "slug": "Story LV",
-    "url": "https://www.lavanguardia.com/relatos/20260425/11522565/manel-ruiz-maestro-relojero-gran-error-mucha-gente-comprarse-reloj-lujo-pensando-dara-hora-perfecta-no-es-importante-gvm.html",
+    "url": "https://www.lavanguardia.com/motor/20260508/11533623/maribel-vicente-nomadas-5-anos-mas-economico-vivir-autocaravana-piso-epm.html",
     "label": "Story",
     "cookieDomain": "lavanguardia.com"
   },
   {
-    "slug": "Video Story LV",
-    "url": "https://www.lavanguardia.com/internacional/20260515/11539048/trump-llega-tramo-final-visita-china-rica-simbolismo-pobre-concreciones.html",
-    "label": "Video Story",
+    "slug": "Story Video LV",
+    "url": "https://www.lavanguardia.com/politica/20260331/11502824/sanchez-busca-prender-barcelona-mecha-frente-progresista-internacional.html",
+    "label": "Story Video",
     "cookieDomain": "lavanguardia.com"
   },
   {
-    "slug": "Moveo Story LV",
-    "url": "https://www.lavanguardia.com/motor/actualidad/20260512/11532388/enric-roche-medico-vascular-tomar-aspirina-viajar-prevenir-problemas-circulacion-ninguna-base-cientifica.html",
-    "label": "Moveo Story",
+    "slug": "Opinion LV",
+    "url": "https://www.lavanguardia.com/deportes/real-madrid/20260513/11536773/florentino-perez-vulnerable.html",
+    "label": "Opinion",
+    "cookieDomain": "lavanguardia.com"
+  },
+  {
+    "slug": "Gallery LV",
+    "url": "https://www.lavanguardia.com/motor/actualidad/20251126/11302625/mejores-momentos-gala-entrega-premios-moveo-la-vanguardia.html",
+    "label": "Gallery",
+    "cookieDomain": "lavanguardia.com"
+  },
+  {
+    "slug": "Videonoticia LV",
+    "url": "https://www.lavanguardia.com/comer/20260514/11537672/vdd-paella-espana-minutos-comida.html",
+    "label": "Videonoticia",
     "cookieDomain": "lavanguardia.com"
   }
 ]

@@ -19,32 +19,38 @@
   },
   {
     "slug": "Solomoto Story MD",
-    "url": "https://www.mundodeportivo.com/solomoto/20260605/1560079/nuevo-juguete-bimota-ligero-adictivo-llama-kb398-v2.html",
+    "url": "https://www.mundodeportivo.com/solomoto/20260318/1004155159/nuevo-juguete-bimota-ligero-adictivo-llama-kb399.html",
     "label": "Solomoto Story",
     "cookieDomain": "mundodeportivo.com"
   },
   {
     "slug": "Story MD",
-    "url": "https://www.mundodeportivo.com/futbol/20260605/1560084/inigualable-palmares-leo-messi-premio-princesa-asturias-deportes-2026.html",
+    "url": "https://www.mundodeportivo.com/futbol/20260603/1004190823/inigualable-palmares-leo-messi.html",
     "label": "Story",
     "cookieDomain": "mundodeportivo.com"
   },
   {
+    "slug": "Video Story MD",
+    "url": "https://www.mundodeportivo.com/futbol/fc-barcelona/20260519/1004185224/prioridad-ansu-fati-seguir-barca.html",
+    "label": "Video Story",
+    "cookieDomain": "mundodeportivo.com"
+  },
+  {
     "slug": "Opinion MD",
-    "url": "https://www.mundodeportivo.com/futbol/fc-barcelona/20260605/1560087/mejor-historia.html",
+    "url": "https://www.mundodeportivo.com/futbol/fc-barcelona/20260603/1004190682/mejor-historia.html",
     "label": "Opinion",
     "cookieDomain": "mundodeportivo.com"
   },
   {
     "slug": "Gallery MD",
-    "url": "https://www.mundodeportivo.com/elotromundo/gente/20260605/1560091/aitana-abre-album-ultimos-dias-inicio-nueva-gira.html",
+    "url": "https://www.mundodeportivo.com/elotromundo/gente/20260506/1004179877/aitana-abre-album-ultimos-dias-inicio-nueva-gira-galeria-dct.html",
     "label": "Gallery",
     "cookieDomain": "mundodeportivo.com"
   },
   {
-    "slug": "Video News MD",
-    "url": "https://www.mundodeportivo.com/futbol/real-madrid/20260605/1560089/florentino-adelanta-fichaje-mourinho-enrique-riquelme-promete-haaland-rodri.html",
-    "label": "Video News",
+    "slug": "Videonoticia MD",
+    "url": "https://www.mundodeportivo.com/futbol/real-madrid/20260604/1004191237/florentino-adelanta-fichaje-mourinho-enrique-riquelme-promete-haaland-rodri.html",
+    "label": "Videonoticia",
     "cookieDomain": "mundodeportivo.com"
   }
 ]

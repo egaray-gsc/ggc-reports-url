@@ -30,6 +30,12 @@
     "cookieDomain": "mundodeportivo.biz"
   },
   {
+    "slug": "Video Story MD BIZ",
+    "url": "https://www.mundodeportivo.biz/futbol/fc-barcelona/20260605/1560090/biz-opcion-ansu-barca-sigue-abierta.html",
+    "label": "Video Story",
+    "cookieDomain": "mundodeportivo.biz"
+  },
+  {
     "slug": "Opinion MD BIZ",
     "url": "https://www.mundodeportivo.biz/futbol/fc-barcelona/20260605/1560087/mejor-historia.html",
     "label": "Opinion",
@@ -42,9 +48,9 @@
     "cookieDomain": "mundodeportivo.biz"
   },
   {
-    "slug": "Video Story MD BIZ",
+    "slug": "Videonoticia MD BIZ",
     "url": "https://www.mundodeportivo.biz/futbol/real-madrid/20260605/1560089/biz-florentino-adelanta-fichaje-mourinho-enrique-riquelme-promete-haaland-rodri.html",
-    "label": "Video Story",
+    "label": "Videonoticia",
     "cookieDomain": "mundodeportivo.biz"
   }
 ]
